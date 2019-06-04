@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //laudo = findViewById(R.id.btnStudent);
+        laudo = findViewById(R.id.btnLaudo);
         //historico = findViewById(R.id.btnCourse);
         calendario = findViewById(R.id.btnCalendario);
         documentos = findViewById(R.id.btnDocumento);
@@ -60,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, MeusDocumentos.class);
+                startActivity(it);
+            }
+        });
+
+        laudo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(MainActivity.this, Configuracao.class);
                 startActivity(it);
             }
         });
