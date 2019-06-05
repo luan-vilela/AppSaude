@@ -7,9 +7,19 @@
     tools:context=".Configuracao">
 
     <LinearLayout
-        android:layout_width="410dp"
-        android:layout_height="637dp"
-        android:orientation="vertical">
+        android:id="@+id/linearLayout3"
+        android:layout_width="207dp"
+        android:layout_height="750dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/layoutGenero"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView"
@@ -27,6 +37,22 @@
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data de Nascimento"
+            app:layout_constraintStart_toStartOf="@+id/btnNome"
+            app:layout_constraintTop_toBottomOf="@+id/btnNome" />
+
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date" />
 
         <TextView
             android:id="@+id/textView5"
@@ -79,6 +105,68 @@
             app:layout_constraintStart_toStartOf="@+id/textView7"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layoutGenero"
+        android:layout_width="0dp"
+        android:layout_height="596dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout3"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sexo"
+            app:layout_constraintStart_toStartOf="@+id/generos"
+            app:layout_constraintTop_toBottomOf="@+id/btnNome" />
+
+        <Spinner
+            android:id="@+id/generos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cep"
+            app:layout_constraintBottom_toTopOf="@+id/editText11"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/editText13"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bairro"
+            app:layout_constraintStart_toStartOf="@+id/editText10"
+            app:layout_constraintTop_toBottomOf="@+id/editText10" />
+
+        <EditText
+            android:id="@+id/editText11"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView11" />
+
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
@@ -91,29 +179,12 @@
 
         <EditText
             android:id="@+id/editText10"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bairro"
-            app:layout_constraintStart_toStartOf="@+id/editText10"
-            app:layout_constraintTop_toBottomOf="@+id/editText10" />
-
-        <EditText
-            android:id="@+id/editText11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView11" />
 
         <TextView
             android:id="@+id/textView10"
@@ -124,58 +195,10 @@
 
         <EditText
             android:id="@+id/editText12"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cep"
-            app:layout_constraintBottom_toTopOf="@+id/editText11"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/editText13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Data de Nascimento"
-            app:layout_constraintStart_toStartOf="@+id/btnNome"
-            app:layout_constraintTop_toBottomOf="@+id/btnNome" />
-
-        <EditText
-            android:id="@+id/editText4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="date"
-            app:layout_constraintEnd_toStartOf="@+id/generos"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sexo"
-            app:layout_constraintStart_toStartOf="@+id/generos"
-            app:layout_constraintTop_toBottomOf="@+id/btnNome" />
-
-        <Spinner
-            android:id="@+id/generos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
     </LinearLayout>
-
 
 </android.support.constraint.ConstraintLayout>
