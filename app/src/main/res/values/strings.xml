@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="confirmSave">Deseja salva essa ação?</string>
+    <string name="alertSave">Salvo com sucesso!</string>
+    <string name="alertWarning">Atenção!!!</string>
+    <string name="errorName">Digite um nome válido.</string>
+    <string name="errorEmail">Digite um email válido.</string>
+    <string name="errorPhone">Digite um telefone válido.</string>
+    <string name="errorData">Digite data nascimento válido.</string>
+    <string name="errorEndereco">Digite um endereço válido.</string>
+    <string name="errorCep">Digite um cep válido.</string>
+    <string name="errorBairro">Digite um Bairro válido.</string>
+    <string name="errorComplemento">Digite um Complemento válido.</string>
+    <string name="errorNumero">Digite um Número válido.</string>
 </resources>

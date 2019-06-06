@@ -48,7 +48,7 @@
 
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/btnNascimento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -59,11 +59,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email"
-            app:layout_constraintStart_toStartOf="@+id/editText4"
-            app:layout_constraintTop_toTopOf="@+id/editText4" />
+            app:layout_constraintStart_toStartOf="@+id/btnNascimento"
+            app:layout_constraintTop_toTopOf="@+id/btnNascimento" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/btnEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -76,11 +76,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Telefone"
-            app:layout_constraintStart_toStartOf="@+id/editText5"
-            app:layout_constraintTop_toBottomOf="@+id/editText5" />
+            app:layout_constraintStart_toStartOf="@+id/btnEmail"
+            app:layout_constraintTop_toBottomOf="@+id/btnEmail" />
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/btnTelefone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -93,17 +93,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Endereço"
-            app:layout_constraintStart_toStartOf="@+id/editText6"
-            app:layout_constraintTop_toBottomOf="@+id/editText6" />
+            app:layout_constraintStart_toStartOf="@+id/btnTelefone"
+            app:layout_constraintTop_toBottomOf="@+id/btnTelefone" />
 
         <EditText
-            android:id="@+id/editText7"
+            android:id="@+id/btnEndereco"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPostalAddress"
             app:layout_constraintStart_toStartOf="@+id/textView7"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="btnSave"
+            android:text="Salvar" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="btnCancel"
+            android:text="Voltar" />
 
 
     </LinearLayout>
@@ -140,11 +154,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cep"
-            app:layout_constraintBottom_toTopOf="@+id/editText11"
+            app:layout_constraintBottom_toTopOf="@+id/btnBairro"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/editText13"
+            android:id="@+id/btnCep"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -155,11 +169,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bairro"
-            app:layout_constraintStart_toStartOf="@+id/editText10"
-            app:layout_constraintTop_toBottomOf="@+id/editText10" />
+            app:layout_constraintStart_toStartOf="@+id/btnComplemento"
+            app:layout_constraintTop_toBottomOf="@+id/btnComplemento" />
 
         <EditText
-            android:id="@+id/editText11"
+            android:id="@+id/btnBairro"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -174,11 +188,11 @@
             android:layout_marginStart="1dp"
             android:layout_marginLeft="1dp"
             android:text="Complemento"
-            app:layout_constraintStart_toStartOf="@+id/editText7"
-            app:layout_constraintTop_toBottomOf="@+id/editText7" />
+            app:layout_constraintStart_toStartOf="@+id/btnEndereco"
+            app:layout_constraintTop_toBottomOf="@+id/btnEndereco" />
 
         <EditText
-            android:id="@+id/editText10"
+            android:id="@+id/btnComplemento"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -194,7 +208,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/editText12"
+            android:id="@+id/btnNumero"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -204,7 +218,7 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="gestante"/>
+            android:text="gestante" />
 
         <Spinner
             android:id="@+id/gestante"

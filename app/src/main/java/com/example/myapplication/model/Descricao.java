@@ -7,23 +7,28 @@ public class Descricao {
     private String  nome;
     private String  data_nasc;
     private String  email;
-    private String  sexo;
-    private String  gestante;
-    private Integer telfone;
+    private String  telefone;
     private String  endereco;
+    private String cep;
     private String  bairro;
     private String  complemento;
+    private String  numero;
 
-    public Descricao(String nome, String data_nasc, String email, String sexo, String gestante, Integer telfone, String endereco, String bairro, String complemento) {
+    private String  sexo;
+    private String  gestante;
+
+    public Descricao(String nome, String data_nasc, String email, String telefone, String endereco, String cep, String bairro, String complemento, String numero, String sexo, String gestante) {
         this.nome = nome;
         this.data_nasc = data_nasc;
         this.email = email;
-        this.sexo = sexo;
-        this.gestante = gestante;
-        this.telfone = telfone;
+        this.telefone = telefone;
         this.endereco = endereco;
+        this.cep = cep;
         this.bairro = bairro;
         this.complemento = complemento;
+        this.numero = numero;
+        this.sexo = sexo;
+        this.gestante = gestante;
     }
 
     public int getId() {
@@ -58,28 +63,12 @@ public class Descricao {
         this.email = email;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getGestante() {
-        return gestante;
-    }
-
-    public void setGestante(String gestante) {
-        this.gestante = gestante;
-    }
-
-    public Integer getTelfone() {
-        return telfone;
-    }
-
-    public void setTelfone(Integer telfone) {
-        this.telfone = telfone;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public String getEndereco() {
@@ -88,6 +77,14 @@ public class Descricao {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
     public String getBairro() {
@@ -104,5 +101,29 @@ public class Descricao {
 
     public void setComplemento(String complemento) {
         this.complemento = complemento;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getGestante() {
+        return gestante;
+    }
+
+    public void setGestante(String gestante) {
+        this.gestante = gestante;
     }
 }
