@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">My Application</string>
+    <!--##############################################-->
+    <!--#                 Texto alertas                # -->
+    <!--##############################################-->
     <string name="confirmSave">Deseja salva essa ação?</string>
     <string name="alertSave">Salvo com sucesso!</string>
     <string name="alertWarning">Atenção!!!</string>
@@ -12,4 +15,36 @@
     <string name="errorBairro">Digite um Bairro válido.</string>
     <string name="errorComplemento">Digite um Complemento válido.</string>
     <string name="errorNumero">Digite um Número válido.</string>
+    <!--##############################################-->
+    <!--#                 Texto Menus                # -->
+    <!--##############################################-->
+    <string name="mainLaudo">Visualizar laudos</string>
+    <string name="mainMedico">Histórico de Médicos</string>
+    <string name="mainCalendario">Calendário</string>
+    <string name="mainDocumento">Meus Documentos</string>
+
+    <!--# Menu Configurações-->
+    <string name="mainNome">Nome</string>
+    <string name="mainNascimento">Data de nascimento</string>
+    <string name="mainSexo">Sexo</string>
+    <string name="mainTelefone">Telefone de cadastro</string>
+    <string name="mainEmail">Email</string>
+    <string name="mainRua">Rua</string>
+    <string name="mainComplemento">Complemento</string>
+    <string name="mainNumero">Número</string>
+    <string name="mainBairro">Bairro</string>
+    <string name="mainCEP">CEP</string>
+    <string name="mainGestante">Você é gestante?</string>
+    <string-array name="sexoSpiner">
+        <item>Feminino</item>
+        <item>Masculino</item>
+    </string-array>
+
+    <!--##############################################-->
+    <!--#                 Texto Botões              # -->
+    <!--##############################################-->
+    <string name="btnSalvar">Salvar</string>
+    <string name="btnEditar">Editar</string>
+    <string name="btnDelete">Excluir</string>
+
 </resources>
