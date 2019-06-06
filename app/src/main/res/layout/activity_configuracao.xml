@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="btnCancel"
-                android:text="Voltar" />
+                android:text="@string/voltar" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="btnSave"
-                android:text="Salvar" />
+                android:text="@string/salvar" />
 
         </LinearLayout>
 

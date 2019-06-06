@@ -39,6 +39,8 @@
         <item>Feminino</item>
         <item>Masculino</item>
     </string-array>
+    <string name="voltar">Voltar</string>
+    <string name="salvar">Salvar</string>
 
     <!--##############################################-->
     <!--#                 Texto Botões              # -->
@@ -46,5 +48,14 @@
     <string name="btnSalvar">Salvar</string>
     <string name="btnEditar">Editar</string>
     <string name="btnDelete">Excluir</string>
+
+    <!--##############################################-->
+    <!--#                 Texto Documento                # -->
+    <!--##############################################-->
+    <string name="Tfoto">Tirar Foto</string>
+    <string name="Sfoto">Selecionar Foto</string>
+    <string name="Doc">*Descrição do Documento</string>
+    <string name="Mydoc">Meus Documentos</string>
+
 
 </resources>

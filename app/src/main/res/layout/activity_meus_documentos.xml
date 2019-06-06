@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="94dp"
         android:layout_marginBottom="24dp"
-        android:text="Meus Documentos"
+        android:text="@string/Mydoc"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/lista"
         app:layout_constraintEnd_toEndOf="parent"
