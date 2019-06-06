@@ -6,4 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".Historico">
 
+    <ImageView
+        android:id="@+id/ivImagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="40dp"
+        tools:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/laudos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Mylaud"
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="157dp" />
+
+    <RelativeLayout
+        android:layout_width="395dp"
+        android:layout_height="539dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="184dp">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
 </android.support.constraint.ConstraintLayout>

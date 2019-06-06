@@ -57,5 +57,7 @@
     <string name="Doc">*Descrição do Documento</string>
     <string name="Mydoc">Meus Documentos</string>
 
+    <!--# texto historico laudo-->
+    <string name="Mylaud">Visualizar Laudos</string>
 
 </resources>
