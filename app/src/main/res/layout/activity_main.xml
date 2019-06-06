@@ -17,6 +17,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <Space
@@ -24,22 +26,37 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/ivImagem"
-                android:layout_width="256dp"
-                android:layout_height="226dp"
-                android:layout_marginTop="27dp"
-                android:layout_marginBottom="36dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_launcher_background" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivImagem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginBottom="36dp"
+                    android:layout_weight="0"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nome da Pessoa"
+                    android:textAlignment="center" />
+            </LinearLayout>
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/btnConfig"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:clickable="true"
-                android:layout_margin="4dp"
                 app:backgroundTint="#4CAF50"
                 app:srcCompat="@android:drawable/ic_menu_manage" />
 
@@ -49,7 +66,7 @@
             android:id="@+id/linearLayout"
             android:layout_width="197dp"
             android:layout_height="345dp"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="vertical">
 
             <Button
