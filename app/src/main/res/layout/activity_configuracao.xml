@@ -51,21 +51,24 @@
             android:paddingBottom="30dp">
 
             <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
                 android:paddingBottom="6dp">
 
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_launcher_background" />
 
                 <Button
                     android:id="@+id/button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="58dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/btnEditar" />
+                    android:layout_gravity="bottom|right"
+                    android:drawableLeft="@android:drawable/ic_menu_edit"
+                    android:visibility="visible" />
 
             </FrameLayout>
 
@@ -133,7 +136,8 @@
                     <Spinner
                         android:id="@+id/generos"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown" />
 
                 </LinearLayout>
 
