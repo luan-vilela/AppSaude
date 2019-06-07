@@ -6,14 +6,11 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +29,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
+
+
+
+    void btnLaudo(View view){
+        Toast.makeText(this,"Clicou no laudo", Toast.LENGTH_LONG).show();
+    }
+
+    void btnMedico(View view){
+        Toast.makeText(this,"Clicou no Médico", Toast.LENGTH_LONG).show();
+    }
+    void btnCalendario(View view){
+        Toast.makeText(this,"Clicou no Calendário", Toast.LENGTH_LONG).show();
+    }
+    void btnDocumento(View view){
+        Toast.makeText(this,"Clicou no Documento", Toast.LENGTH_LONG).show();
+    }
+
+
+
+
 
 
 
