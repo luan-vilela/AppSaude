@@ -9,7 +9,7 @@ public class Descricao {
     private String  email;
     private String  telefone;
     private String  endereco;
-    private String cep;
+    private String  cep;
     private String  bairro;
     private String  complemento;
     private String  numero;

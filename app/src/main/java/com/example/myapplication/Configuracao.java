@@ -27,7 +27,7 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
     private EditText bairro;
     private EditText complemento;
     private EditText numero;
-    private
+
 
     Crud db;
 
@@ -61,5 +61,10 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void btnCancel(View v){
+        Intent it = new Intent(this, MainActivity.class);
+        startActivity(it);
     }
 }
