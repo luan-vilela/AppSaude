@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    // ##################################################################
+    //                  BOTÕES PRINCIPAIS DA MAIN                       #
+    // ##################################################################
     void btnLaudo(View view){
         Toast.makeText(this,"Clicou no laudo", Toast.LENGTH_LONG).show();
     }
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     void btnMedico(View view){
         Toast.makeText(this,"Clicou no Médico", Toast.LENGTH_LONG).show();
     }
+
     void btnCalendario(View view){
         Toast.makeText(this,"Clicou no Calendário", Toast.LENGTH_LONG).show();
     }
