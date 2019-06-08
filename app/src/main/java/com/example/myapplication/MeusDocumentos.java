@@ -34,4 +34,9 @@ public class MeusDocumentos extends AppCompatActivity {
         });
 
     }
+
+    public void btnCancel(View v){
+        Intent it = new Intent(this, MainActivity.class);
+        startActivity(it);
+    }
 }
