@@ -56,6 +56,8 @@
     <string name="Sfoto">Selecionar Foto</string>
     <string name="Doc">*Descrição do Documento</string>
     <string name="Mydoc">Meus Documentos</string>
+    <string name="Mylaudo">Visualizar laudos</string>
+
 
     <!--# texto historico laudo-->
     <string name="Mylaud">Visualizar Laudos</string>

@@ -44,6 +44,14 @@
             android:padding="70dp"
             android:src="@android:drawable/ic_menu_crop" />
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/Mylaudo"
+            android:textSize="24sp" />
+
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
