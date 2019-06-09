@@ -11,10 +11,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.model.Crud;
+import com.example.myapplication.model.Profile;
+
 public class MainActivity extends AppCompatActivity {
-    LinearLayout calendario,documento,laudo,historico;
+    private LinearLayout calendario,documento,laudo,historico;
+    private TextView nome;
+
+    private Crud db;
+    private Profile user;
 
 
 
@@ -23,6 +31,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        db = new Crud(this);
+
+        nome = findViewById(R.id.txtNome);
+
+        // Seta nome do usuário
+        user = db.selecionaProfile();
+        if(user != null && user.getId() == 1) {
+            setarPropriedades();
+
+        }
         // Botão flutuante para configurações
         FloatingActionButton add = findViewById(R.id.btnConfig);
 
@@ -35,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this,Configuracao.class);
-                finish();
                 startActivity(it);
             }
         });
@@ -43,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
         calendario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(MainActivity.this,Calendario.class);
-                finish();
+                Intent it = new Intent(MainActivity.this,Historico.class);
                 startActivity(it);
             }
         });
@@ -53,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this,MeusDocumentos.class);
-                finish();
                 startActivity(it);
             }
         });
@@ -62,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this,Laudo.class);
-                finish();
                 startActivity(it);
             }
         });
@@ -71,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this,Historico.class);
-                finish();
                 startActivity(it);
             }
         });
@@ -81,29 +94,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    // ##################################################################
-    //                  BOTÕES PRINCIPAIS DA MAIN                       #
-    // ##################################################################
-    void btnLaudo(View view){
-        Toast.makeText(this,"Clicou no laudo", Toast.LENGTH_LONG).show();
+    public void setarPropriedades(){
+        nome.setText(user.getNome());
+        
     }
-
-    void btnMedico(View view){
-        Toast.makeText(this,"Clicou no Médico", Toast.LENGTH_LONG).show();
-    }
-
-    void btnCalendario(View view){
-        Toast.makeText(this,"Clicou no Calendário", Toast.LENGTH_LONG).show();
-    }
-    void btnDocumento(View view){
-        Toast.makeText(this,"Clicou no Documento", Toast.LENGTH_LONG).show();
-    }
-
-
-
-
-
-
-
 }
