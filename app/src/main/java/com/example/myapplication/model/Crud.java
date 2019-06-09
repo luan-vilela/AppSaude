@@ -4,11 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.util.Log;
-import android.widget.Toast;
-
-import java.util.Random;
 
 
 public class Crud extends Connect {
@@ -123,7 +118,9 @@ public class Crud extends Connect {
     }
 
 
-
+    /**
+     * Altera foto apenas, sem precisar puxar todos os dados
+     * */
     public void setaFoto(String local){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
