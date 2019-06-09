@@ -58,6 +58,8 @@
     <string name="Doc">*Descrição do Documento</string>
     <string name="Mydoc">Meus Documentos</string>
     <string name="Mylaudo">Visualizar laudos</string>
+    <string name="Myhistorico">Histórico de Médicos</string>
+
 
 
     <!--# texto historico laudo-->

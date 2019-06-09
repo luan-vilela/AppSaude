@@ -180,6 +180,12 @@ public class Documento extends AppCompatActivity {
                 break;
         }
     }
+
+    public void btnCancel(View v){
+        Intent it = new Intent(this, MainActivity.class);
+        startActivity(it);
+    }
+
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(Documento.this)
                 .setMessage(message)
