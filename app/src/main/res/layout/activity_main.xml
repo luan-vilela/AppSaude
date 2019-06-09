@@ -8,6 +8,310 @@
     tools:context=".MainActivity">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:textAlignment="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivImagem"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="0"
+                android:background="@drawable/bg_image_view_profile"
+                android:padding="70dp"
+                android:src="@android:drawable/ic_menu_crop" />
+
+            <TextView
+                android:id="@+id/txtNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="0"
+                android:text="Nome da pessoa"
+                android:textAlignment="center" />
+
+            <!--########################################################################-->
+            <!--Botões usando do menu, estilo arredondados.-->
+            <!--Com esses botões o usuário não precisa entrar nas respectivas telas-->
+            <!--para ver a quantidade de informações-->
+
+            <!--Visualizar laudos-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="btnLaudo">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/bg_shadow_list_view"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgIco"
+                            android:layout_width="wrap_content"
+                            android:layout_height="73dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@android:drawable/ic_menu_upload" />
+
+                        <TextView
+                            android:id="@+id/txtIcoLaudo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Titulo Icone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnLaudos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtTituloLaudo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mainLaudo"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/txtDescricaoLaudo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Quantidades de itens" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <!--Histórico de médicos-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="btnMedico">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/bg_shadow_list_view"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgIcoMedico"
+                            android:layout_width="wrap_content"
+                            android:layout_height="73dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@android:drawable/ic_menu_upload" />
+
+                        <TextView
+                            android:id="@+id/txtIcoMedico"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Titulo Icone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnHistoricos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtTituloMedico"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mainMedico"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/txtDescricaoMedico"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Quantidades de itens" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <!--Calendário-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="btnCalendario">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/bg_shadow_list_view"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgIcoCalendario"
+                            android:layout_width="wrap_content"
+                            android:layout_height="73dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@android:drawable/ic_menu_upload" />
+
+                        <TextView
+                            android:id="@+id/txtIcoCalendario"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Titulo Icone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnCalendario"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtTituloCalendario"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mainCalendario"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/txtDescricaoCalendario"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Quantidades de itens" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <!--Meus documentos-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="btnDocumento">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/bg_shadow_list_view"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgIcoDocumento"
+                            android:layout_width="wrap_content"
+                            android:layout_height="73dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@android:drawable/ic_menu_upload" />
+
+                        <TextView
+                            android:id="@+id/txtIcoDocumento"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Titulo Icone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnDocumentos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtTituloDocumento"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mainDocumento"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/txtDescricaoDocumento"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Quantidades de itens" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <!--id do usuário-->
+            <TextView
+                android:id="@+id/idCod"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="0"
+                android:gravity="bottom|center_vertical"
+                android:text="#1234"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnConfig"
         android:layout_width="wrap_content"
@@ -22,305 +326,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_manage" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ivImagem"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="0"
-            android:background="@drawable/bg_image_view_profile"
-            android:padding="70dp"
-            android:src="@android:drawable/ic_menu_crop" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="0"
-            android:text="Nome da pessoa"
-            android:textAlignment="center" />
-
-            <!--########################################################################-->
-            <!--Botões usando do menu, estilo arredondados.-->
-            <!--Com esses botões o usuário não precisa entrar nas respectivas telas-->
-            <!--para ver a quantidade de informações-->
-
-            <!--Visualizar laudos-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="btnLaudo">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/bg_shadow_list_view"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imgIco"
-                        android:layout_width="wrap_content"
-                        android:layout_height="73dp"
-                        android:layout_gravity="center"
-                        app:srcCompat="@android:drawable/ic_menu_upload" />
-
-                    <TextView
-                        android:id="@+id/txtIcoLaudo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Titulo Icone" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnLaudos"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtTituloLaudo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/mainLaudo"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:id="@+id/txtDescricaoLaudo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Quantidades de itens" />
-                </LinearLayout>
-            </LinearLayout>
-        </RelativeLayout>
-
-
-        <!--Histórico de médicos-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="btnMedico">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/bg_shadow_list_view"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imgIcoMedico"
-                        android:layout_width="wrap_content"
-                        android:layout_height="73dp"
-                        android:layout_gravity="center"
-                        app:srcCompat="@android:drawable/ic_menu_upload" />
-
-                    <TextView
-                        android:id="@+id/txtIcoMedico"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Titulo Icone" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnHistoricos"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtTituloMedico"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/mainMedico"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:id="@+id/txtDescricaoMedico"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Quantidades de itens" />
-                </LinearLayout>
-            </LinearLayout>
-        </RelativeLayout>
-
-
-        <!--Calendário-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="btnCalendario">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/bg_shadow_list_view"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imgIcoCalendario"
-                        android:layout_width="wrap_content"
-                        android:layout_height="73dp"
-                        android:layout_gravity="center"
-                        app:srcCompat="@android:drawable/ic_menu_upload" />
-
-                    <TextView
-                        android:id="@+id/txtIcoCalendario"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Titulo Icone" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnCalendario"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtTituloCalendario"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/mainCalendario"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:id="@+id/txtDescricaoCalendario"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Quantidades de itens" />
-                </LinearLayout>
-            </LinearLayout>
-        </RelativeLayout>
-
-
-        <!--Meus documentos-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="btnDocumento">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/bg_shadow_list_view"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imgIcoDocumento"
-                        android:layout_width="wrap_content"
-                        android:layout_height="73dp"
-                        android:layout_gravity="center"
-                        app:srcCompat="@android:drawable/ic_menu_upload" />
-
-                    <TextView
-                        android:id="@+id/txtIcoDocumento"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Titulo Icone" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnDocumentos"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtTituloDocumento"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/mainDocumento"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:id="@+id/txtDescricaoDocumento"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Quantidades de itens" />
-                </LinearLayout>
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <!--id do usuário-->
-        <TextView
-            android:id="@+id/idCod"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:gravity="bottom|center_vertical"
-            android:text="#1234"
-            android:textAlignment="center"
-            android:textSize="18sp" />
-
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

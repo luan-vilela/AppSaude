@@ -9,7 +9,7 @@
     <string name="errorName">Digite um nome válido.</string>
     <string name="errorEmail">Digite um email válido.</string>
     <string name="errorPhone">Digite um telefone válido.</string>
-    <string name="errorData">Digite data nascimento válido.</string>
+    <string name="errorData">Selecione uma data de nascimento.</string>
     <string name="errorEndereco">Digite um endereço válido.</string>
     <string name="errorCep">Digite um cep válido.</string>
     <string name="errorBairro">Digite um Bairro válido.</string>
@@ -36,6 +36,7 @@
     <string name="mainCEP">CEP</string>
     <string name="mainGestante">Você é gestante?</string>
     <string name="mainPais">Pais</string>
+    <string name="mainEstado">Estado</string>
     <string-array name="sexoSpiner">
         <item>Feminino</item>
         <item>Masculino</item>

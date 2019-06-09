@@ -96,6 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void setarPropriedades(){
         nome.setText(user.getNome());
-        
+
     }
 }

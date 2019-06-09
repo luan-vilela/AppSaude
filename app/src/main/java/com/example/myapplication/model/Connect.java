@@ -23,14 +23,15 @@ public class Connect extends SQLiteOpenHelper {
     public static final String TABLE_PROFILE = "" +
             "CREATE TABLE IF NOT EXISTS profile (" +
             "id INTEGER PRIMARY KEY, " +
-            "name VARCHAR(100), " +
-            "email TEXT, " +
-            "sexo INTEGER, " +
-            "dataNascimento DATE, " +
-            "telefone TEXT, " +
-            "fotoCaminho TEXT, " +
-            "idRegistro TEXT, " +
-            "gestante INTEGER " +
+            "name VARCHAR(100)," +
+            "email TEXT," +
+            "sexo INTEGER," +
+            "dataNascimento TEXT," +
+            "telefone TEXT," +
+            "fotoCaminho TEXT," +
+            "idRegistro TEXT," +
+            "gestante INTEGER," +
+            "idDate INTEGER" +
             ")";
 
     // Tabela data
@@ -93,23 +94,24 @@ public class Connect extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Criação das tabelas
-//        db.execSQL(TABLE_PROFILE);
-//        db.execSQL(TABLE_DATA);
+        db.execSQL(TABLE_PROFILE);
         db.execSQL(TABLE_ENDERECO);
-//        db.execSQL(TABLE_DOCUMENTO);
-//        db.execSQL(TABLE_MEDICO);
-//        db.execSQL(TABLE_LAUDO);
+        db.execSQL(TABLE_DATA);
+        db.execSQL(TABLE_DOCUMENTO);
+        db.execSQL(TABLE_MEDICO);
+        db.execSQL(TABLE_LAUDO);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion != newVersion){
+            db.execSQL("DROP TABLE IF EXISTS profile");
             db.execSQL("DROP TABLE IF EXISTS endereco");
-//            db.execSQL("DROP TABLE IF EXISTS documento");
-//            db.execSQL("DROP TABLE IF EXISTS medico");
-//            db.execSQL("DROP TABLE IF EXISTS laudo");
-//            db.execSQL("DROP TABLE IF EXISTS data");
-//            db.execSQL("DROP TABLE IF EXISTS profile");
+            db.execSQL("DROP TABLE IF EXISTS documento");
+            db.execSQL("DROP TABLE IF EXISTS medico");
+            db.execSQL("DROP TABLE IF EXISTS laudo");
+            db.execSQL("DROP TABLE IF EXISTS data");
+
             onCreate(db);
         }
     }
