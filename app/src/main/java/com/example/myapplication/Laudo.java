@@ -5,14 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class Historico extends AppCompatActivity {
+public class Laudo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_historico);
+        setContentView(R.layout.activity_laudo);
     }
-
 
     public void btnCancel(View v){
         Intent it = new Intent(this, MainActivity.class);

@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import android.os.Debug;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -143,7 +143,8 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
     }
     //Botão Cancelar
     public void btnCancel(View view){
-
+        Intent it = new Intent(this, MainActivity.class);
+        startActivity(it);
     }
 
 

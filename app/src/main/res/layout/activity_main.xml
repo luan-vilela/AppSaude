@@ -96,10 +96,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btnLaudos"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
+                    android:clickable="true"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
@@ -157,10 +159,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btnHistoricos"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
+                    android:clickable="true"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
@@ -218,10 +222,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btnCalendario"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
+                    android:clickable="true"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
@@ -279,10 +285,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btnDocumentos"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
+                    android:clickable="true"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
