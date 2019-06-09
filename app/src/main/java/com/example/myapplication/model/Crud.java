@@ -22,7 +22,7 @@ public class Crud extends Connect {
         values.put("name", user.getNome() );
         values.put("email", user.getEmail() );
         values.put("sexo", user.getSexo() );
-        values.put("dataNascimento", user.getData_nasc());
+        values.put("dataNascimento", user.getData_nascString());
         values.put("telefone", user.getTelefone() );
         values.put("fotoCaminho", user.getFotoCaminho() );
         values.put("idRegistro", user.getIdRegistro() );
