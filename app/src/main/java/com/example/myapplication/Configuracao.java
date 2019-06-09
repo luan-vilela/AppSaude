@@ -1,9 +1,16 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -22,12 +30,15 @@ import com.example.myapplication.model.Crud;
 import com.example.myapplication.model.Endereco;
 import com.example.myapplication.model.Profile;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.text.ParseException;
 import java.util.Calendar;
 
 
 public class Configuracao extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private ImageView minhaFoto;
     private EditText nome;
     private EditText dataNascimento;
     private EditText email;
@@ -75,6 +86,7 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         /*
         * Linkando os botões
         */
+        minhaFoto = (ImageView) findViewById(R.id.configImage);
         nome = findViewById(R.id.inputNome);
         dataNascimento = (EditText) findViewById(R.id.inputNascimento);
         dataNascimento.setKeyListener(null);
@@ -215,6 +227,17 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         Boolean setGestante = (user.getGestante() == 0) ? false : true;
         gestanteSwitch.setChecked(setGestante);
 
+        /* FOTO */
+
+        File img = new  File(user.getFotoCaminho());
+
+        if(img.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+            minhaFoto.setImageBitmap(myBitmap);
+        }
+
+
+
         // endereço
         if(enderecoUser != null) {
             rua.setText(enderecoUser.getRua());
@@ -227,6 +250,33 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+
+    public void editFoto(View view){
+        Intent it = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(Intent.createChooser(it, "Selecione uma imagem"), 123);
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == 123){
+                Uri imagemSelecionada = data.getData();
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+                Cursor cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                String picturePath = cursor.getString(columnIndex);
+                cursor.close();
+
+                minhaFoto.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+            }
+        }
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

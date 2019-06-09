@@ -55,7 +55,7 @@
                     android:paddingBottom="6dp">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/configImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/ic_launcher_background" />
@@ -66,6 +66,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|right"
                         android:drawableLeft="@android:drawable/ic_menu_edit"
+                        android:onClick="editFoto"
                         android:visibility="visible" />
 
                 </FrameLayout>
