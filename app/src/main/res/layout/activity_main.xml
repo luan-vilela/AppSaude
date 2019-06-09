@@ -54,12 +54,12 @@
             android:text="Nome da pessoa"
             android:textAlignment="center" />
 
-        <!--########################################################################-->
-        <!--Botões usando do menu, estilo arredondados.-->
-        <!--Com esses botões o usuário não precisa entrar nas respectivas telas-->
-        <!--para ver a quantidade de informações-->
+            <!--########################################################################-->
+            <!--Botões usando do menu, estilo arredondados.-->
+            <!--Com esses botões o usuário não precisa entrar nas respectivas telas-->
+            <!--para ver a quantidade de informações-->
 
-        <!--Visualizar laudos-->
+            <!--Visualizar laudos-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,8 +85,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="73dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@android:drawable/sym_action_email" />
+                        app:srcCompat="@android:drawable/ic_menu_upload" />
 
+                    <TextView
+                        android:id="@+id/txtIcoLaudo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Titulo Icone" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -142,8 +148,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="73dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@android:drawable/sym_contact_card" />
+                        app:srcCompat="@android:drawable/ic_menu_upload" />
 
+                    <TextView
+                        android:id="@+id/txtIcoMedico"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Titulo Icone" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -199,8 +211,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="73dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+                        app:srcCompat="@android:drawable/ic_menu_upload" />
 
+                    <TextView
+                        android:id="@+id/txtIcoCalendario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Titulo Icone" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -256,8 +274,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="73dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+                        app:srcCompat="@android:drawable/ic_menu_upload" />
 
+                    <TextView
+                        android:id="@+id/txtIcoDocumento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Titulo Icone" />
                 </LinearLayout>
 
                 <LinearLayout

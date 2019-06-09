@@ -1,12 +1,16 @@
 package com.example.myapplication;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -19,6 +23,7 @@ import com.example.myapplication.model.Endereco;
 import com.example.myapplication.model.Profile;
 
 import java.text.ParseException;
+import java.util.Calendar;
 
 
 public class Configuracao extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -30,13 +35,18 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
     private TextView IdRegitroApp;
     private Switch gestanteSwitch;
     private Boolean gestante;
+    Spinner spnGenero;
+    // para trabalhar com pop-calendário
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-    private EditText endereco;
+    private EditText rua;
     private EditText cep;
     private EditText bairro;
     private EditText complemento;
     private EditText numero;
     private EditText pais;
+    private EditText estado;
+
     private Profile user;
     private Endereco enderecoUser;
 
@@ -56,8 +66,7 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
          * Array do Masculino e feminino está puxando de String.xml assim quando mudar
          * idioma vai atualizar no menu também.
          * */
-
-        Spinner spnGenero = (Spinner) findViewById(R.id.generos);
+        spnGenero = (Spinner) findViewById(R.id.generos);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.sexoSpiner, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnGenero.setAdapter(adapter);
@@ -67,35 +76,73 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         * Linkando os botões
         */
         nome = findViewById(R.id.inputNome);
-        dataNascimento = findViewById(R.id.inputNascimento);
+        dataNascimento = (EditText) findViewById(R.id.inputNascimento);
+        dataNascimento.setKeyListener(null);
+        dataNascimento.setFocusable(false);
         email = findViewById(R.id.inputEmail);
         telefone = findViewById(R.id.inputTelefone);
         gestanteSwitch = findViewById(R.id.gestante);
 
-        endereco = findViewById(R.id.inputEndereco);
+        rua = findViewById(R.id.inputEndereco);
         cep = findViewById(R.id.inputCep);
         bairro = findViewById(R.id.inputBairro);
         complemento = findViewById(R.id.inputComplemento);
         numero = findViewById(R.id.inputNumero);
         pais = findViewById(R.id.inputPais);
+        estado = findViewById(R.id.inputEstado);
 
-        //debug user
+        //####################################################
+        //Calendário
+        // Chama calendário para evitar digitação
+        dataNascimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        enderecoUser = new Endereco("minha rua", "140", "", "centro", "79000-000","MS", "Brasil");
+                DatePickerDialog dialog = new DatePickerDialog(
+                        Configuracao.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+
+                String date = year + "-" + month + "-" + day;
+                dataNascimento.setText(date);
+            }
+        };
+
+
+
+        //####################################################
+        //#   Aqui são carregados os dados na tela
+        //# caso já tenha cadastro no celular
+
+        user = db.selecionaProfile();
+
+        if(user != null && user.getId() == 1){
+            enderecoUser = db.selecionaEndereco();
+            setarPropriedades();
+        }
+
+
     }
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
 
     //Botão salvar
     public void btnSave(View view) {
+        //Variável de teste
+        // caso não seja especificado algo que deve ser escrito
+        // teste muda para 0
         int teste = 1;
         String userNome = nome.getText().toString();
         String userEmail = email.getText().toString();
@@ -104,15 +151,17 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         // converter Booleano para int
         int userGestante = (gestanteSwitch.isChecked() == true) ? 1 : 0;
 
+
         /*
         * Parte do endereço
         * */
-        String userEndereco = endereco.getText().toString();
+        String userRua = rua.getText().toString();
         String userNumero = numero.getText().toString();
         String userCEP = cep.getText().toString();
         String userBairro = bairro.getText().toString();
         String userComplemento = complemento.getText().toString();
         String userPais = pais.getText().toString();
+        String userProvincia = estado.getText().toString();
 
         if(userNome == null || userNome.equals("")){
             nome.setError(getString(R.string.errorName));
@@ -133,8 +182,11 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
 
 
         if(teste == 1){
-            user = new Profile("Luan#1234", userNome, userEmail, 1, "1990-09-13", "9999-9999", "/xx",0, 1);
+            enderecoUser = new Endereco(userRua,userNumero,userComplemento,userBairro, userCEP, userProvincia, userPais);
+            user = new Profile("Luan#1234", userNome, userEmail, spnGenero.getSelectedItemPosition(), userNascimento, userPhone, "/xx",userGestante, 1);
+            // Envia dados para salvar no banco
             db.addUser(user);
+            db.addEndereco(enderecoUser);
             Toast.makeText(this,"Adicionado com sucesso", Toast.LENGTH_LONG).show();
         }
 
@@ -148,5 +200,42 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
+    /**
+     * Seta os campos da tela configurações
+     * */
+    public void setarPropriedades(){
+        nome.setText(user.getNome());
+        dataNascimento.setText(user.getData_nasc());
+        email.setText(user.getEmail());
+        telefone.setText(user.getTelefone());
+        spnGenero.setSelection(user.getSexo());
+
+        // Seta Switch da gestante
+        // faz conversão de int para Boolean
+        Boolean setGestante = (user.getGestante() == 0) ? false : true;
+        gestanteSwitch.setChecked(setGestante);
+
+        // endereço
+        if(enderecoUser != null) {
+            rua.setText(enderecoUser.getRua());
+            complemento.setText(enderecoUser.getComplemento());
+            numero.setText(enderecoUser.getNumero());
+            bairro.setText(enderecoUser.getBairro());
+            cep.setText(enderecoUser.getCodPost());
+            pais.setText(enderecoUser.getPais());
+            estado.setText(enderecoUser.getProvincia());
+        }
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        //nada aqui
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        //nada aqui
+    }
 
 }

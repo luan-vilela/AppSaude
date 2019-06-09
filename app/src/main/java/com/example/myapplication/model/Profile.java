@@ -6,10 +6,6 @@
  * */
 package com.example.myapplication.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Profile {
 
 
@@ -18,32 +14,25 @@ public class Profile {
     private String  nome;
     private String  email;
     private int sexo;
-    private Date data_nasc;
+    private String data_nasc;
     private String  telefone;
     private String fotoCaminho;
     private int gestante;
     private int idDataCriacao;
 
-    // Formato que deve ser a data
-    SimpleDateFormat format;
+
 
 
     public Profile(String idRegistro, String nome, String email, int sexo, String data_nasc, String telefone, String fotoCaminho, int gestante, int idDataCriacao) {
-        format = new SimpleDateFormat("yyyy-MM-dd");
         this.idRegistro = idRegistro;
         this.nome = nome;
         this.email = email;
         this.sexo = sexo;
-        try {
-            this.data_nasc = format.parse(data_nasc);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        this.data_nasc = data_nasc;
         this.telefone = telefone;
         this.fotoCaminho = fotoCaminho;
         this.gestante = gestante;
         this.idDataCriacao = idDataCriacao;
-        this.format = format;
     }
 
     public int getId() {
@@ -86,23 +75,16 @@ public class Profile {
         this.sexo = sexo;
     }
 
-    public Date getData_nasc() {
+    public String getData_nasc() {
         return data_nasc;
     }
-    public String getData_nascString() {
-        return format.format(data_nasc);
-    }
 
-    public void setData_nasc(Date data_nasc) {
+    public void setData_nasc(String data_nasc) {
         this.data_nasc = data_nasc;
     }
 
     public String getTelefone() {
         return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public String getFotoCaminho() {
@@ -129,11 +111,19 @@ public class Profile {
         this.idDataCriacao = idDataCriacao;
     }
 
-    public SimpleDateFormat getFormat() {
-        return format;
-    }
-
-    public void setFormat(SimpleDateFormat format) {
-        this.format = format;
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "id=" + id +
+                ", idRegistro='" + idRegistro + '\'' +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", sexo=" + sexo +
+                ", data_nasc='" + data_nasc + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", fotoCaminho='" + fotoCaminho + '\'' +
+                ", gestante=" + gestante +
+                ", idDataCriacao=" + idDataCriacao +
+                '}';
     }
 }
