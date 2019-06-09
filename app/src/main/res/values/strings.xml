@@ -35,6 +35,7 @@
     <string name="mainBairro">Bairro</string>
     <string name="mainCEP">CEP</string>
     <string name="mainGestante">Você é gestante?</string>
+    <string name="mainPais">Pais</string>
     <string-array name="sexoSpiner">
         <item>Feminino</item>
         <item>Masculino</item>
