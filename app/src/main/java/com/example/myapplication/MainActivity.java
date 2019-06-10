@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         calendario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(MainActivity.this,Historico.class);
+                Intent it = new Intent(MainActivity.this,Calendario.class);
                 startActivity(it);
             }
         });
