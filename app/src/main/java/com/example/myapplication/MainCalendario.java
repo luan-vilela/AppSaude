@@ -16,7 +16,7 @@ import com.github.sundeepk.compactcalendarview.domain.Event;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-public class Calendario extends AppCompatActivity {
+public class MainCalendario extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

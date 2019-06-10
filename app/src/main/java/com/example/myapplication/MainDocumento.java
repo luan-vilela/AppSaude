@@ -29,14 +29,13 @@ import android.widget.Toast;
 
 import com.example.myapplication.model.Crud;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
-public class Documento extends AppCompatActivity {
+public class MainDocumento extends AppCompatActivity {
 
     private Button btnTake;
     private Button btnSelect;
@@ -94,12 +93,12 @@ public class Documento extends AppCompatActivity {
                     //salvando a imagem
                     String path = saveImage(bitmap);
                     Log.i("TAG","Path: "+path);
-                    Toast.makeText(Documento.this, "Image saved",
+                    Toast.makeText(MainDocumento.this, "Image saved",
                             Toast.LENGTH_SHORT).show();
                     ivImage.setImageBitmap(resizeImage(bitmap,600,700));
                 }catch (IOException e){
                     e.printStackTrace();
-                    Toast.makeText(Documento.this, "Failed",
+                    Toast.makeText(MainDocumento.this, "Failed",
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -107,7 +106,7 @@ public class Documento extends AppCompatActivity {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             ivImage.setImageBitmap(resizeImage(bitmap,600,700));
             saveImage(bitmap);
-            Toast.makeText(Documento.this, "Image Saved",
+            Toast.makeText(MainDocumento.this, "Image Saved",
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -224,7 +223,7 @@ public class Documento extends AppCompatActivity {
     }
 
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(Documento.this)
+        new AlertDialog.Builder(MainDocumento.this)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", null)

@@ -23,12 +23,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar">
-        <activity android:name=".MeusLaudos"></activity>
-        <activity android:name=".Historico" />
+        <activity android:name=".MainLaudos"></activity>
+        <activity android:name=".MainHistorico" />
         <activity android:name=".Configuracao" />
         <activity android:name=".MeusDocumentos" />
-        <activity android:name=".Documento" />
-        <activity android:name=".Calendario" />
+        <activity android:name=".MainDocumento" />
+        <activity android:name=".MainCalendario" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

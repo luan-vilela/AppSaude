@@ -59,7 +59,7 @@ public class Connect extends SQLiteOpenHelper {
             "pais TEXT" +
             ")";
 
-    // Tabela Documento
+    // Tabela MainDocumento
     public static final String TABLE_DOCUMENTO = "" +
             "CREATE TABLE IF NOT EXISTS documento (" +
             "id INTEGER PRIMARY KEY, " +
@@ -88,7 +88,7 @@ public class Connect extends SQLiteOpenHelper {
         super(context, DATABASE, null, VERSIOM_DATABASE);
     }
 
-    // Tabela MeusLaudos
+    // Tabela MainLaudos
     public static final String TABLE_LAUDO = "" +
             "CREATE TABLE IF NOT EXISTS laudo (" +
             "id INTEGER PRIMARY KEY, " +

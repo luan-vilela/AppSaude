@@ -23,7 +23,7 @@ public class Crud extends Connect {
         values.put("descricao", doc.getDescricao());
         values.put("foto", doc.getFoto());
 
-        db.insert("Documento", null, values);
+        db.insert("MainDocumento", null, values);
         db.close();
     }
 

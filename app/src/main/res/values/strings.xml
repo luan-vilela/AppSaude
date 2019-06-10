@@ -57,7 +57,7 @@
     <string name="btnCancelar">Cancelar</string>
 
     <!--##############################################-->
-    <!--#                 Texto Documento                # -->
+    <!--#                 Texto MainDocumento                # -->
     <!--##############################################-->
     <string name="Tfoto">Tirar Foto</string>
     <string name="Sfoto">Selecionar Foto</string>

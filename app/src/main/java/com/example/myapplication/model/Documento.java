@@ -36,7 +36,7 @@ public class Documento {
 
     @Override
     public String toString() {
-        return "Documento{" +
+        return "MainDocumento{" +
                 "id=" + id +
                 ", descricao='" + descricao + '\'' +
                 ", foto='" + foto +

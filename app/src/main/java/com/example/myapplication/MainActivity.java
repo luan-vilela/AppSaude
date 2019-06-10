@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         calendario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(MainActivity.this,Calendario.class);
+                Intent it = new Intent(MainActivity.this, MainCalendario.class);
                 startActivity(it);
             }
         });
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         laudo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(MainActivity.this, MeusLaudos.class);
+                Intent it = new Intent(MainActivity.this, MainLaudos.class);
                 startActivity(it);
             }
         });
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         historico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(MainActivity.this,Historico.class);
+                Intent it = new Intent(MainActivity.this, MainHistorico.class);
                 startActivity(it);
             }
         });
