@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MeusDocumentos extends AppCompatActivity {
@@ -24,6 +25,9 @@ public class MeusDocumentos extends AppCompatActivity {
         setContentView(R.layout.activity_meus_documentos);
 
         add = findViewById(R.id.btnAdd);
+
+        //List<Documento> documentos =
+        //ListView lista = (ListView) findViewById(R.id.lista);
 
 
         add.setOnClickListener(new View.OnClickListener() {

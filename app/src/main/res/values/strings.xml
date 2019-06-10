@@ -15,6 +15,8 @@
     <string name="errorBairro">Digite um Bairro válido.</string>
     <string name="errorComplemento">Digite um Complemento válido.</string>
     <string name="errorNumero">Digite um Número válido.</string>
+    <string name="errorDescricao">O documento precissa possuir uma descrição.</string>
+    <string name="errorFoto">O documento precisa possuir uma foto.</string>
     <!--##############################################-->
     <!--#                 Texto Menus                # -->
     <!--##############################################-->

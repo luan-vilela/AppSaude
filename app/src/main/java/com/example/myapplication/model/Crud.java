@@ -12,6 +12,17 @@ public class Crud extends Connect {
         super(context);
     }
 
+    public void addDoc(Documento doc){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("descricao", doc.getDescricao());
+        values.put("foto", doc.getFoto());
+
+        db.insert("Documento", null, values);
+        db.close();
+    }
+
     public void addUser(Profile user){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

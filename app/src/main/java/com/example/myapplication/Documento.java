@@ -24,7 +24,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.myapplication.model.Crud;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -38,6 +41,12 @@ public class Documento extends AppCompatActivity {
     private Button btnTake;
     private Button btnSelect;
     private ImageView ivImage;
+    private String foto;
+    private TextView descricao;
+    private com.example.myapplication.model.Documento docUser;
+
+    Crud db;
+
     //p tratamentos futuros
     private static final int PERMISSION_REQUEST_CODE=200;
     private int GALLERY=1, CAMERA=2;
@@ -52,6 +61,7 @@ public class Documento extends AppCompatActivity {
         btnTake = findViewById(R.id.btnTake);
         btnSelect = findViewById(R.id.btnSelect);
         ivImage = findViewById(R.id.ivImagem);
+        descricao = findViewById(R.id.edtNome);
         btnTake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,6 +192,30 @@ public class Documento extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    public void btnSalvar(View view){
+        int teste = 1;
+
+        String userDescricao = descricao.getText().toString();
+        //String userFoto = foto.getText().toString();
+
+        if(userDescricao == null || userDescricao.equals("")){
+            descricao.setError(getString(R.string.errorDescricao));
+            teste = 0;
+        }
+        /*if(userFoto == null || userDescricao.equals("")){
+            descricao.setError(getString(R.string.errorFoto));
+            teste = 0;
+        }*/
+
+        if(teste == 1){
+            docUser = new com.example.myapplication.model.Documento(userDescricao, "my_images");
+            db.addDoc(docUser);
+            Toast.makeText(this,"Adicionado com sucesso", Toast.LENGTH_LONG).show();
+        }
+
+
     }
 
     public void btnCancel(View v){
