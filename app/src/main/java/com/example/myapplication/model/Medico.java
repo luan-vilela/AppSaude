@@ -8,7 +8,9 @@ public class Medico {
     private String observação;
     private int gestante;
     private int idData;
-
+    /**
+     * Recebe um nome
+     * */
     public Medico(String nome, String especialidade, String[] exames, String observação, int gestante, int idData) {
         this.nome = nome;
         this.especialidade = especialidade;
@@ -42,8 +44,8 @@ public class Medico {
         this.especialidade = especialidade;
     }
 
-    public String[] getExames() {
-        return exames;
+    public String getExames() {
+        return exames.toString();
     }
 
     public void setExames(String[] exames) {

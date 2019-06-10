@@ -35,16 +35,33 @@ public class Crud extends Connect {
      * Grava data e local no banco
      *
      * Retorna id salvo no banco
+     *
+
+    /**
+     * Adiciona uma data e local no banco de dados
+     * Data gerada automaticamente e local passado por string.
+     *
+     * Recebe um local(STRING)
+     * Grava data e local no banco
+     *
+     * Retorna id salvo no banco
      * */
-    public int addData(String local){
-        //gera data DATETIME
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
+    public int addData(String local, String data){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put("data", dateFormat.format(date));
+        // caso não passe data ele cria ela com a do dia
+        if(data == null) {
+            //gera data DATETIME
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date();
+            values.put("data", dateFormat.format(date));
+        }
+        else{
+            values.put("data", data);
+        }
+
         values.put("local", local);
         db.insert("data", null, values);
         db.close();
@@ -132,7 +149,7 @@ public class Crud extends Connect {
 
         // Cadastra data e hora que foi feito o registro
         // local poderia ser usado para GPS
-        addData("desconhecido");
+        addData("desconhecido", null);
 
     }
 
@@ -151,6 +168,30 @@ public class Crud extends Connect {
         values.put("pais", endereco.getPais());
 
         db.insert("endereco", null,  values);
+        db.close();
+    }
+
+    public void addMedico(Medico medico){
+        //String nome, String especialidade, String[] exames, String observação, int gestante, int idData)
+
+//        "id INTEGER PRIMARY KEY, " +
+//                "nome TEXT, " +
+//                "especialidade TEXT, " +
+//                "examesPedidos TEXT, " +
+//                "observacao TEXT, " +
+//                "gestante BOOLEAN, " +
+//                "idData INTEGER, " +
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("nome", medico.getNome());
+        values.put("especialidade", medico.getEspecialidade());
+        values.put("examesPedidos", medico.getExames());
+        values.put("observacao", medico.getObservação());
+        values.put("gestante", medico.getGestante());
+        values.put("idData", medico.getIdData());
+
+        db.insert("medico", null,  values);
         db.close();
     }
 

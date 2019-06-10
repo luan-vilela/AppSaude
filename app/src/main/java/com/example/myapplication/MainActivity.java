@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.myapplication.model.Crud;
+import com.example.myapplication.model.Medico;
 import com.example.myapplication.model.Profile;
 
 import java.io.File;
@@ -34,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         db = new Crud(this);
+
+        // Debug Medico
+        String[] exame = {"exame de sangue", "exame de tireoide"};
+        Medico med = new Medico("medico","clinico geral",exame, "Sem observação", 0, db.addData("Afonso pena", null));
+        db.addMedico(med);
 
         nome = findViewById(R.id.txtNome);
 
