@@ -22,49 +22,49 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_manage" />
 
-             <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-             <de.hdodenhof.circleimageview.CircleImageView
-               android:id="@+id/ivImagem"
-               android:layout_width="160dp"
-               android:layout_height="160dp"
-               android:layout_marginTop="20dp"
-               android:layout_marginBottom="10dp"
-               android:layout_weight="0"
-               android:background="@drawable/bg_image_view_profile"
-               android:padding="70dp"
-               android:src="@android:drawable/ic_menu_crop" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivImagem"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0"
+            android:background="@drawable/bg_image_view_profile"
+            android:padding="70dp"
+            android:src="@android:drawable/ic_menu_crop" />
 
-            <TextView
-               android:id="@+id/txtNome"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginBottom="10dp"
-               android:layout_weight="0"
-               android:text="Nome da pessoa"
-               android:textAlignment="center" />
+        <TextView
+            android:id="@+id/txtNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0"
+            android:text="Nome da pessoa"
+            android:textAlignment="center" />
 
-            <!--########################################################################-->
-            <!--Botões usando do menu, estilo arredondados.-->
-            <!--Com esses botões o usuário não precisa entrar nas respectivas telas-->
-            <!--para ver a quantidade de informações-->
+        <!--########################################################################-->
+        <!--Botões usando do menu, estilo arredondados.-->
+        <!--Com esses botões o usuário não precisa entrar nas respectivas telas-->
+        <!--para ver a quantidade de informações-->
 
-            <!--Visualizar laudos-->
-            <RelativeLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:onClick="btnLaudo"
-               tools:ignore="OnClick">
+        <!--Visualizar laudos-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="btnLaudo"
+            tools:ignore="OnClick">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,43 +75,43 @@
                 android:background="@drawable/bg_shadow_list_view"
                 android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:orientation="vertical"
-                android:clickable="true">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:clickable="true"
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imgIco"
-                    android:layout_width="wrap_content"
-                    android:layout_height="73dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@android:drawable/sym_action_email" />
+                    <ImageView
+                        android:id="@+id/imgIco"
+                        android:layout_width="wrap_content"
+                        android:layout_height="73dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@android:drawable/sym_action_email" />
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/btnLaudos"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/btnLaudos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtTituloLaudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mainLaudo"
-                android:textSize="24sp" />
+                    <TextView
+                        android:id="@+id/txtTituloLaudo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mainLaudo"
+                        android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/txtDescricaoLaudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                    <TextView
+                        android:id="@+id/txtDescricaoLaudo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Quantidades de itens" />
                 </LinearLayout>
             </LinearLayout>
@@ -138,8 +138,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
-                    android:orientation="vertical"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/imgIcoMedico"
@@ -197,8 +197,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
-                    android:orientation="vertical"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/imgIcoCalendario"
@@ -256,8 +256,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
-                    android:orientation="vertical"
-                    android:clickable="true">
+                    android:clickable="true"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/imgIcoDocumento"
