@@ -54,13 +54,13 @@
     <!--##############################################-->
     <!--#                 Texto Documento                # -->
     <!--##############################################-->
-    <string name="Tfoto">Tirar Foto</string>
-    <string name="Sfoto">Selecionar Foto</string>
+    <string name="Tfoto">Carregar</string>
+    <string name="Sfoto">Tirar Foto</string>
     <string name="Doc">*Descrição do Documento</string>
     <string name="Mydoc">Meus Documentos</string>
     <string name="Mylaudo">Visualizar laudos</string>
+    <string name="Newdoc">Novo Documento</string>
     <string name="Myhistorico">Histórico de Médicos</string>
-
 
 
     <!--# texto historico laudo-->
