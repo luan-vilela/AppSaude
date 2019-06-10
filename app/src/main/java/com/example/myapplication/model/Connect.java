@@ -37,6 +37,15 @@ public class Connect extends SQLiteOpenHelper {
     // Tabela data
     public static final String TABLE_DATA = "CREATE TABLE IF NOT EXISTS  data(id INTEGER PRIMARY KEY, data DATETIME, local TEXT)";
 
+    // Tabela evento
+    public static final String TABELA_EVENTO = "" +
+            "CREATE TABLE IF NOT EXISTS  evento(" +
+            "id INTEGER PRIMARY KEY, " +
+            "descricao TEXT, " +
+            "idData INTEGER, " +
+            "FOREIGN KEY(idData) REFERENCES data(id)" +
+            ")";
+
     // Tabela endereço
     public static final String TABLE_ENDERECO = "" +
             "CREATE TABLE IF NOT EXISTS endereco (" +
@@ -100,6 +109,7 @@ public class Connect extends SQLiteOpenHelper {
         db.execSQL(TABLE_DOCUMENTO);
         db.execSQL(TABLE_MEDICO);
         db.execSQL(TABLE_LAUDO);
+        db.execSQL(TABELA_EVENTO);
     }
 
     @Override
@@ -111,6 +121,7 @@ public class Connect extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS medico");
             db.execSQL("DROP TABLE IF EXISTS laudo");
             db.execSQL("DROP TABLE IF EXISTS data");
+            db.execSQL("DROP TABLE IF EXISTS evento");
 
             onCreate(db);
         }
