@@ -19,8 +19,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myapplication.model.Crud;
+import com.example.myapplication.model.Profile;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
@@ -28,12 +31,21 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import com.example.myapplication.model.Data;
+
+
 
 public class MainCalendario extends Activity implements Button.OnClickListener {
+
     private Button createNotification;
+
     private Button botao;
 
+    private EditText dataNascimento;
+
     static final int DATE_DIALOG_ID = 0;
+
+    Crud db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +54,10 @@ public class MainCalendario extends Activity implements Button.OnClickListener {
         botao = (Button) findViewById(R.id.btn);
         botao.setOnClickListener(this);
 
+        // context para DatabaseopenHelper
+        db = new Crud(this);
+
+        //parte da notificação
         createNotification = findViewById(R.id.gera_notificacao);
         createNotification.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -91,6 +107,7 @@ public class MainCalendario extends Activity implements Button.OnClickListener {
     protected Dialog onCreateDialog(int id) {
         Calendar calendario = Calendar.getInstance();
 
+        //pegando dados do calendario
         int ano = calendario.get(Calendar.YEAR);
         int mes = calendario.get(Calendar.MONTH);
         int dia = calendario.get(Calendar.DAY_OF_MONTH);
@@ -105,10 +122,12 @@ public class MainCalendario extends Activity implements Button.OnClickListener {
 
     private DatePickerDialog.OnDateSetListener mDateSetListener =
             new DatePickerDialog.OnDateSetListener() {
-                public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                      int dayOfMonth) {
-                    String data = String.valueOf(year) + "-"
-                            + String.valueOf(monthOfYear + 1) + "-" + String.valueOf(dayOfMonth);
+                public void onDateSet(DatePicker view, int year, int month,
+                                      int day) {
+
+                    String data = year + "-" + month + "-" + day;
+                    
+
                     Toast.makeText(com.example.myapplication.MainCalendario.this,
                             "DATA = " + data, Toast.LENGTH_SHORT)
                             .show();
