@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         laudo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(MainActivity.this,Laudo.class);
+                Intent it = new Intent(MainActivity.this, MeusLaudos.class);
                 startActivity(it);
             }
         });

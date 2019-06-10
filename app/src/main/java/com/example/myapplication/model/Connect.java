@@ -88,15 +88,15 @@ public class Connect extends SQLiteOpenHelper {
         super(context, DATABASE, null, VERSIOM_DATABASE);
     }
 
-    // Tabela Laudo
+    // Tabela MeusLaudos
     public static final String TABLE_LAUDO = "" +
             "CREATE TABLE IF NOT EXISTS laudo (" +
             "id INTEGER PRIMARY KEY, " +
             "nome TEXT, " +
+            "descricao TEXT, " +
             "local_dispositivo TEXT, " +
             "gestante BOOLEAN, " +
             "idData INTEGER, " +
-            "idProfile INTEGER, " +
             "FOREIGN KEY(idData) REFERENCES data(id) " +
             ")";
 
