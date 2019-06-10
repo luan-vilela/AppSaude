@@ -39,6 +39,7 @@
                 android:id="@+id/btnAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="btnSave"
                 app:backgroundTint="@color/bg_clean"
                 app:srcCompat="@android:drawable/ic_input_add" />
 

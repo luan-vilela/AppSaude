@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.model.Crud;
+import com.example.myapplication.model.Documento;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -47,10 +48,10 @@ public class MainDocumento extends AppCompatActivity {
     Crud db;
 
     //p tratamentos futuros
-    private static final int PERMISSION_REQUEST_CODE=200;
-    private int GALLERY=1, CAMERA=2;
+    private static final int PERMISSION_REQUEST_CODE = 200;
+    private int GALLERY = 1, CAMERA = 2;
     //diretorio p salvar as imagens
-    private static final String IMAGE_DIRECTORY="/my_images";
+    private static final String IMAGE_DIRECTORY = "/my_images";
 
 
     @Override
@@ -59,7 +60,7 @@ public class MainDocumento extends AppCompatActivity {
         setContentView(R.layout.activity_documento);
         btnTake = findViewById(R.id.btnTake);
         btnSelect = findViewById(R.id.btnSelect);
-        ivImage = findViewById(R.id.ivImagem);
+        ivImage = findViewById(R.id.ivImage);
         descricao = findViewById(R.id.edtNome);
         btnTake.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,69 +79,74 @@ public class MainDocumento extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == this.RESULT_CANCELED){
+        if (requestCode == this.RESULT_CANCELED) {
             return;
         }
-        if(requestCode==GALLERY){
-            if(data !=null){
+        if (requestCode == GALLERY) {
+            if (data != null) {
                 Uri contentUri = data.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(
-                            this.getContentResolver(),contentUri);
+                            this.getContentResolver(), contentUri);
                     //salvando a imagem
                     String path = saveImage(bitmap);
-                    Log.i("TAG","Path: "+path);
+                    foto = saveImage(bitmap);
+                    Log.i("TAG", "Path: " + path);
                     Toast.makeText(MainDocumento.this, "Image saved",
                             Toast.LENGTH_SHORT).show();
-                    ivImage.setImageBitmap(resizeImage(bitmap,600,700));
-                }catch (IOException e){
+                    ivImage.setImageBitmap(resizeImage(bitmap, 600, 700));
+                } catch (IOException e) {
                     e.printStackTrace();
                     Toast.makeText(MainDocumento.this, "Failed",
                             Toast.LENGTH_SHORT).show();
                 }
             }
-        }else if(requestCode==CAMERA){
+        } else if (requestCode == CAMERA) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            ivImage.setImageBitmap(resizeImage(bitmap,600,700));
-            saveImage(bitmap);
+            ivImage.setImageBitmap(resizeImage(bitmap, 600, 700));
+            foto = saveImage(bitmap);
             Toast.makeText(MainDocumento.this, "Image Saved",
                     Toast.LENGTH_SHORT).show();
         }
     }
-    public String saveImage(Bitmap bitmap){
+
+    public String saveImage(Bitmap bitmap) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         File directory = new File(
-                Environment.getExternalStorageDirectory()+IMAGE_DIRECTORY);
+                Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
         //Criando o diretorio
-        if(!directory.exists())
+        if (!directory.exists())
             directory.mkdirs();
         try {
             File fileImage = new File(directory,
-                    Calendar.getInstance().getTimeInMillis()+".jpg");
+                    Calendar.getInstance().getTimeInMillis() + ".jpg");
             fileImage.createNewFile();
             FileOutputStream fo = new FileOutputStream(fileImage);
             fo.write(bytes.toByteArray());
             MediaScannerConnection.scanFile(this, new String[]{fileImage.getPath()},
-                    new String[]{"image/jpeg"},null);
+                    new String[]{"image/jpeg"}, null);
             fo.close();
-            return  fileImage.getAbsolutePath();
-        }catch (IOException el){
+            return fileImage.getAbsolutePath();
+        } catch (IOException el) {
             el.printStackTrace();
         }
         return "";
     }
-    public static Bitmap resizeImage(Bitmap bitmap, int newWidth, int newHeight){
+
+    public static Bitmap resizeImage(Bitmap bitmap, int newWidth, int newHeight) {
         Bitmap output = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
         Matrix m = new Matrix();
-        m.setScale((float)newWidth/bitmap.getWidth(),(float)newHeight/bitmap.getHeight());
+        m.setScale((float) newWidth / bitmap.getWidth(), (float) newHeight / bitmap.getHeight());
         canvas.drawBitmap(bitmap, m, new Paint());
         return output;
     }
+
     private boolean checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -162,7 +168,7 @@ public class MainDocumento extends AppCompatActivity {
 
     private void requestPermission() {
         ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,  Manifest.permission.READ_EXTERNAL_STORAGE},
+                new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
                 PERMISSION_REQUEST_CODE);
     }
 
@@ -176,7 +182,7 @@ public class MainDocumento extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED) {
+                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                             showMessageOKCancel("You need to allow access permissions",
                                     new DialogInterface.OnClickListener() {
                                         @Override
@@ -193,31 +199,7 @@ public class MainDocumento extends AppCompatActivity {
         }
     }
 
-    public void btnSalvar(View view){
-        int teste = 1;
-
-        String userDescricao = descricao.getText().toString();
-        //String userFoto = foto.getText().toString();
-
-        if(userDescricao == null || userDescricao.equals("")){
-            descricao.setError(getString(R.string.errorDescricao));
-            teste = 0;
-        }
-        /*if(userFoto == null || userDescricao.equals("")){
-            descricao.setError(getString(R.string.errorFoto));
-            teste = 0;
-        }*/
-
-        if(teste == 1){
-            docUser = new com.example.myapplication.model.Documento(userDescricao, "my_images");
-            db.addDoc(docUser);
-            Toast.makeText(this,"Adicionado com sucesso", Toast.LENGTH_LONG).show();
-        }
-
-
-    }
-
-    public void btnCancel(View v){
+    public void btnCancel(View v) {
         Intent it = new Intent(this, MeusDocumentos.class);
         startActivity(it);
     }
@@ -230,6 +212,7 @@ public class MainDocumento extends AppCompatActivity {
                 .create()
                 .show();
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -241,4 +224,24 @@ public class MainDocumento extends AppCompatActivity {
     }
 
 
+    public void btnSave(View view) {
+        int teste = 1;
+
+        String userDescricao = descricao.getText().toString();
+
+        if (userDescricao == null || userDescricao.equals("")) {
+            descricao.setError(getString(R.string.errorDescricao));
+            teste = 0;
+        }
+        if (foto == null || userDescricao.equals("")) {
+            descricao.setError(getString(R.string.errorFoto));
+            teste = 0;
+        }
+
+        if (teste == 1) {
+            docUser = new Documento(userDescricao, foto);
+            db.addDoc(docUser);
+            Toast.makeText(this, "Adicionado com sucesso", Toast.LENGTH_LONG).show();
+        }
+    }
 }
