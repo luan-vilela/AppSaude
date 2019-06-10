@@ -31,12 +31,13 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp">
 
-                <Button
+                <android.support.design.widget.FloatingActionButton
                     android:id="@+id/button3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="btnCancel"
-                    android:text="@string/voltar" />
+                    app:backgroundTint="@color/bg_clean"
+                    app:srcCompat="?attr/actionModeCloseDrawable" />
 
             </LinearLayout>
             <LinearLayout
@@ -47,12 +48,13 @@
                 android:layout_marginTop="8dp"
                 android:background="@color/cardview_light_background"
                 android:orientation="vertical">
+
                 <Button
                     android:id="@+id/button"
                     android:layout_width="58dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center_horizontal"
-                    android:drawableLeft="@android:drawable/ic_menu_edit"
+                    android:drawableLeft="@android:drawable/sym_action_email"
                     android:visibility="visible" />
 
                 <TextView
