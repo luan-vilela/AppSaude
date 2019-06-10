@@ -8,6 +8,20 @@
     tools:context=".MainActivity">
 
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnConfig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
+        android:clickable="true"
+        app:backgroundTint="#4CAF50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_manage" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,7 +29,7 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:textAlignment="center">
@@ -27,8 +41,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="0"
+                android:scaleType="centerCrop"
                 android:background="@drawable/bg_image_view_profile"
-                android:padding="70dp"
                 android:src="@android:drawable/ic_menu_crop" />
 
             <TextView
@@ -48,8 +62,7 @@
             <!--Visualizar laudos-->
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="btnLaudo">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -71,6 +84,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="73dp"
                             android:layout_gravity="center"
+                            android:adjustViewBounds="true"
                             app:srcCompat="@android:drawable/ic_menu_upload" />
 
                         <TextView
@@ -302,6 +316,7 @@
                 android:id="@+id/idCod"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="bottom"
                 android:layout_margin="10dp"
                 android:layout_weight="0"
                 android:gravity="bottom|center_vertical"
@@ -311,19 +326,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnConfig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_weight="1"
-        android:clickable="true"
-        app:backgroundTint="#4CAF50"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_manage" />
 
 </android.support.constraint.ConstraintLayout>

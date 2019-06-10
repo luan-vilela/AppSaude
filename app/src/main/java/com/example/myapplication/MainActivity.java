@@ -4,15 +4,20 @@ package com.example.myapplication;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.myapplication.model.Crud;
 import com.example.myapplication.model.Profile;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout calendario,documento,laudo,historico;
@@ -93,6 +98,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void setarPropriedades(){
         nome.setText(user.getNome());
+        File img = new  File(user.getFotoCaminho());
+
+        if(img.exists()){
+            // coloca foto válida no picturePath caso altera outros dados da tabela menos a foto
+            Bitmap myBitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+            ImageView minhaFoto = findViewById(R.id.ivImagem);
+            minhaFoto.setImageBitmap(myBitmap);
+
+        }
 
     }
 }

@@ -235,7 +235,7 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         Boolean setGestante = (user.getGestante() == 0) ? false : true;
         gestanteSwitch.setChecked(setGestante);
 
-        /* FOTO */
+        /*********** FOTO ************/
         // Verifica se existe foto no banco de dados
         // Se exister verifica se caminho é válido
         File img = new  File(user.getFotoCaminho());
