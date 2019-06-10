@@ -22,6 +22,7 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout calendario,documento,laudo,historico;
+    private TextView medicoContador;
     private TextView nome;
 
     private Crud db;
@@ -38,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Debug Medico
         String[] exame = {"exame de sangue", "exame de tireoide"};
-        Medico med = new Medico("medico","clinico geral",exame, "Sem observação", 0, db.addData("Afonso pena", null));
+        Medico med = new Medico("medico","clinico geral",exame, "Sem observação", 0, db.addData("Afonso pena", "1990-12-30 10:59:59"));
+        db.addMedico(med);
+        med = new Medico("medico","clinico geral 2",exame, "Sem observação", 0, db.addData("Afonso pena", "1990-12-30"));
         db.addMedico(med);
 
         nome = findViewById(R.id.txtNome);
@@ -56,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         documento = findViewById(R.id.btnDocumentos);
         laudo = findViewById(R.id.btnLaudos);
         historico = findViewById(R.id.btnHistoricos);
+        medicoContador = findViewById(R.id.txtDescricaoMedico);
+
+        //Atualiza contadores de menu
+        atualizaContadores();
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,5 +121,10 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    /** Atualiza view usuário com quantidade de dados */
+    public void atualizaContadores(){
+        medicoContador.setText( db.qtdRegistroDB("medico") + " " +getString(R.string.medicoContador));
     }
 }
