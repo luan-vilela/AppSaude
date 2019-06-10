@@ -38,8 +38,10 @@ import com.example.myapplication.model.Profile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class Configuracao extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
