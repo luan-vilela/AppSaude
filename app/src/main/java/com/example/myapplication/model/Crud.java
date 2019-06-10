@@ -5,6 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class Crud extends Connect {
 
@@ -23,6 +27,89 @@ public class Crud extends Connect {
         db.close();
     }
 
+    /**
+     * Adiciona uma data e local no banco de dados
+     * Data gerada automaticamente e local passado por string.
+     *
+     * Recebe um local(STRING)
+     * Grava data e local no banco
+     *
+     * Retorna id salvo no banco
+     * */
+    public int addData(String local){
+        //gera data DATETIME
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("data", dateFormat.format(date));
+        values.put("local", local);
+        db.insert("data", null, values);
+        db.close();
+
+        return qtdRegistroDB("data");
+    }
+
+    /**
+     * Retorna um Objeto Data do banco de dados
+     *
+     * Recebe um id do tipo INTERIRO
+     *
+     * Retorna Data se encontrar ou null se não entrar ou estiver em formato errado
+     * */
+    public Data selecionaData(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Data data = null;
+
+        // Pega a data por id
+        Cursor cursor = db.query("data", new String[]{"id", "data", "local"},
+                "id = ?", new String[] {String.valueOf(id)}, null,null,null,null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+
+            // Caso não consiga criar data vai retornar null
+            try {
+                data = new Data(cursor.getString(1), cursor.getString(2));
+                data.setId(cursor.getInt(0));
+            } catch (ParseException e) {
+                data = null;
+            }
+
+        }
+        db.close();
+
+        return data;
+
+    }
+
+    /**
+     * Conta a quantidade de Registro em uma tabela
+     * Pode ser usado para verificar quantos Laudos,Documentos, etc... existem cadastrados
+     * em determinada tabela.
+     *
+     * Recebe um nome de tabela (STRING)
+     * Retorna um (INT) com número de registro da tabela
+     * */
+    public int qtdRegistroDB(String TabelaName){
+        String query = "SELECT count(*) FROM " + TabelaName;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query,null);
+
+        cursor.moveToFirst();
+        db.close();
+        return cursor.getInt(0);
+    }
+
+
+
+    /**
+     * Adiciona um único usuário ao banco
+     *
+     * Recebe um Profile e cadastra no banco profile
+     * */
     public void addUser(Profile user){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -42,6 +129,10 @@ public class Crud extends Connect {
 //        // Insere na tabela
         db.insert("profile", null,  values);
         db.close();
+
+        // Cadastra data e hora que foi feito o registro
+        // local poderia ser usado para GPS
+        addData("desconhecido");
 
     }
 
