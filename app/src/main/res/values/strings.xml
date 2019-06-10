@@ -15,6 +15,7 @@
     <string name="errorBairro">Digite um Bairro válido.</string>
     <string name="errorComplemento">Digite um Complemento válido.</string>
     <string name="errorNumero">Digite um Número válido.</string>
+    <string name="alertUpdate">Deseja salvar as alterações?</string>
     <!--##############################################-->
     <!--#                 Texto Menus                # -->
     <!--##############################################-->
@@ -50,6 +51,8 @@
     <string name="btnSalvar">Salvar</string>
     <string name="btnEditar">Editar</string>
     <string name="btnDelete">Excluir</string>
+    <string name="btnConfirmar">Confirmar</string>
+    <string name="btnCancelar">Cancelar</string>
 
     <!--##############################################-->
     <!--#                 Texto Documento                # -->

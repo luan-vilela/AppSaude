@@ -63,8 +63,8 @@
                         android:layout_width="180dp"
                         android:layout_height="200dp"
                         android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/ic_launcher_background" />
+                        android:background="@mipmap/ic_launcher_profile"
+                        android:scaleType="centerCrop" />
 
                     <Button
                         android:id="@+id/button"

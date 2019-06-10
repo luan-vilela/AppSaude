@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -15,6 +16,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -200,14 +202,28 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
             teste = 0;
         }
 
-
+        // Caso todos os campos obrigatórios estejam preenchidos
         if(teste == 1){
-            enderecoUser = new Endereco(userRua,userNumero,userComplemento,userBairro, userCEP, userProvincia, userPais);
-            user = new Profile("Luan#1234", userNome, userEmail, spnGenero.getSelectedItemPosition(), userNascimento, userPhone, picturePath,userGestante, 1);
-            // Envia dados para salvar no banco
-            db.addUser(user);
-            db.addEndereco(enderecoUser);
-            Toast.makeText(this,"Adicionado com sucesso", Toast.LENGTH_LONG).show();
+            // caso não tenha foto
+            picturePath = (picturePath == null ? "" : picturePath);
+            // verificando se é para atualizar ou cadastrar
+            if(user != null || enderecoUser != null) {
+
+                user = new Profile("Luan#1234", userNome, userEmail, spnGenero.getSelectedItemPosition(), userNascimento, userPhone, picturePath, userGestante, 1);
+                enderecoUser = new Endereco(userRua, userNumero, userComplemento, userBairro, userCEP, userProvincia, userPais);
+                sucessAtualizar();
+            }
+            else {
+                user = new Profile("Luan#1234", userNome, userEmail, spnGenero.getSelectedItemPosition(), userNascimento, userPhone, picturePath, userGestante, 1);
+                enderecoUser = new Endereco(userRua, userNumero, userComplemento, userBairro, userCEP, userProvincia, userPais);
+                db.addEndereco(enderecoUser);
+                db.addUser(user);
+                sucess();
+            }
+
+
+
+
         }
 
 
@@ -270,6 +286,53 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         startActivityForResult(Intent.createChooser(it, "Selecione uma imagem"), 123);
 
     }
+
+    // Mensagem de confirmação
+    public void sucess(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.alertSave)
+                .setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                        startActivity(getIntent());
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    // Botão Deletar
+    public void sucessAtualizar(){
+        AlertDialog.Builder  builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.alertWarning)
+                .setMessage(R.string.alertUpdate)
+                .setCancelable(true)
+                .setPositiveButton(R.string.btnConfirmar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Caso confirme a altualização de dados
+                        db.atualizaEndereco(enderecoUser);
+                        db.atualizaProfile(user);
+                        finish();
+                        startActivity(getIntent());
+                    }
+                })
+                .setNegativeButton(R.string.btnCancelar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                        startActivity(getIntent());
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+
+    }
+
+
+
     // faz a conversão do caminho em bitmap
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == Activity.RESULT_OK){

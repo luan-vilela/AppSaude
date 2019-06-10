@@ -102,19 +102,57 @@ public class Crud extends Connect {
             if(cursor.moveToFirst()) {
 //          (String rua, String numero, String complemento, String bairro, String codPost, String provincia, String pais)
                 endereco = new Endereco(
-                        cursor.getColumnName(1),
-                        cursor.getColumnName(3),
-                        cursor.getColumnName(2),
-                        cursor.getColumnName(4),
-                        cursor.getColumnName(5),
-                        cursor.getColumnName(6),
-                        cursor.getColumnName(7)
+                        cursor.getString(1),
+                        cursor.getString(3),
+                        cursor.getString(2),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        cursor.getString
+
+                                (7)
                 );
                 // seta id
                 endereco.setId(Integer.parseInt(cursor.getString(0)));
             }
         db.close();
         return  endereco;
+    }
+
+
+    public void atualizaProfile(Profile user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("name", user.getNome() );
+        values.put("email", user.getEmail() );
+        values.put("sexo", user.getSexo() );
+        values.put("dataNascimento", user.getData_nasc());
+        values.put("telefone", user.getTelefone() );
+        values.put("fotoCaminho", user.getFotoCaminho() );
+        values.put("idRegistro", user.getIdRegistro() );
+        values.put("gestante", user.getGestante() );
+        values.put("idDate", user.getIdDataCriacao() );
+
+        db.update("profile", values, "id = ?", new  String[] { String.valueOf(1) });
+        db.close();
+    }
+
+    public void atualizaEndereco(Endereco endereco){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("rua", endereco.getRua());
+        values.put("complemento", endereco.getComplemento());
+        values.put("numero", endereco.getNumero());
+        values.put("bairro", endereco.getBairro());
+        values.put("codPost", endereco.getCodPost());
+        values.put("provincia", endereco.getProvincia());
+        values.put("pais", endereco.getPais());
+
+        db.update("endereco", values, "id = ?", new  String[] { String.valueOf(1) });
+        db.close();
     }
 
 
