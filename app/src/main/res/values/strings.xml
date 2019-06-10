@@ -68,6 +68,8 @@
     <string name="Mylaudo">Visualizar laudos</string>
     <string name="Newdoc">Novo Documento</string>
     <string name="Myhistorico">Histórico de Médicos</string>
+    <string name="Mycalend">Calendário</string>
+
 
     <!--##############################################-->
     <!--#                 Texto Laudos                # -->
