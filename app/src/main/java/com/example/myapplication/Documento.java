@@ -185,7 +185,7 @@ public class Documento extends AppCompatActivity {
     }
 
     public void btnCancel(View v){
-        Intent it = new Intent(this, MainActivity.class);
+        Intent it = new Intent(this, MeusDocumentos.class);
         startActivity(it);
     }
 
