@@ -16,6 +16,8 @@
     <string name="errorComplemento">Digite um Complemento válido.</string>
     <string name="errorNumero">Digite um Número válido.</string>
     <string name="alertUpdate">Deseja salvar as alterações?</string>
+    <string name="errorDescricao">O documento precissa possuir uma descrição.</string>
+    <string name="errorFoto">O documento precisa possuir uma foto.</string>
     <!--##############################################-->
     <!--#                 Texto Menus                # -->
     <!--##############################################-->
@@ -62,6 +64,7 @@
     <string name="Doc">*Descrição do Documento</string>
     <string name="Mydoc">Meus Documentos</string>
     <string name="Mylaudo">Visualizar laudos</string>
+    <string name="Newdoc">Novo Documento</string>
     <string name="Myhistorico">Histórico de Médicos</string>
 
 

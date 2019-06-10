@@ -28,13 +28,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <android.support.design.widget.FloatingActionButton
+            <Button
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="btnCancel"
-                app:backgroundTint="@color/bg_clean"
-                app:srcCompat="?attr/actionModeCloseDrawable" />
+                android:text="@string/voltar" />
 
         </LinearLayout>
 
