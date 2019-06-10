@@ -23,7 +23,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar">
-        <activity android:name=".MainLaudos"></activity>
+        <activity android:name=".MainNotificacao"></activity>
+        <activity android:name=".MainLaudos" />
         <activity android:name=".MainHistorico" />
         <activity android:name=".Configuracao" />
         <activity android:name=".MeusDocumentos" />
