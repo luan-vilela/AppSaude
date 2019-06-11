@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
+import android.net.ParseException;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -19,7 +20,18 @@ import android.widget.ImageView;
 import com.example.myapplication.model.Crud;
 import com.example.myapplication.model.Profile;
 
-import java.lang.reflect.Proxy;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import java.io.IOException;
+
+import java.util.ArrayList;
 
 public class Inicio extends AppCompatActivity {
 
@@ -30,6 +42,7 @@ public class Inicio extends AppCompatActivity {
     private ImageView minhaFoto;
     private EditText nome;
     private EditText email;
+    private String idRegistro;
     Crud db = new Crud(this);
 
     private Profile user;
@@ -53,8 +66,6 @@ public class Inicio extends AppCompatActivity {
             finish();
             startActivity(it);
         }
-
-
     }
 
     //Botão salvar
@@ -80,8 +91,11 @@ public class Inicio extends AppCompatActivity {
         if (teste == 1) {
             // caso não tenha foto
             picturePath = (picturePath == null ? "" : picturePath);
-            Profile aux = new Profile();
+            // envia dados servidor
 
+            enviarDados();
+
+            Profile aux = new Profile();
             aux.setEmail(userEmail);
             aux.setNome(userNome);
             aux.setFotoCaminho(picturePath);
@@ -122,6 +136,61 @@ public class Inicio extends AppCompatActivity {
             }
         }
     }
+
+
+    //#################################### atualizar servidor
+    public void enviarDados(){
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                postHttp(nome.getText().toString(), email.getText().toString());
+            }
+        });
+        t.start();
+
+        try {
+            t.join();
+        } catch (InterruptedException e) {}
+
+    }
+
+    public void postHttp(String nome, String email){
+        HttpClient httpClient = new DefaultHttpClient();
+        //nome do servidor
+        HttpPost httpPost = new HttpPost(getString(R.string.servidor)+getString(R.string.dataBase)+"inicio.php");
+
+        try{
+            ArrayList<NameValuePair> valores = new ArrayList<NameValuePair>();
+            valores.add(new BasicNameValuePair("nome", nome));
+            valores.add(new BasicNameValuePair("email", email));
+            valores.add(new BasicNameValuePair("caminhoFoto", picturePath));
+            httpPost.setEntity(new UrlEncodedFormEntity(valores));
+            final HttpResponse resposta = httpClient.execute(httpPost);
+
+            runOnUiThread(new Runnable(){
+                public void run(){
+                    try {
+                        //salva registro
+                        idRegistro = EntityUtils.toString(resposta.getEntity());
+                        Profile usuario = db.selecionaProfile();
+                        usuario.setIdRegistro(idRegistro);
+                        db.atualizaProfile(usuario);
+                    } catch (ParseException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+        catch(ClientProtocolException e){}
+        catch(IOException e){}
+    }
+
+
+
 
     //#################### PERMISSÃO STORAGE ########################
     // Permissão para acessar a câmera

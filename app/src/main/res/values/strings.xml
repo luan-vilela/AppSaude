@@ -85,4 +85,12 @@
     <string name="eventoContador2">eventos atualmente</string>
 
 
+
+    <!--##############################################-->
+    <!--#                 Texto SERVIDOR                # -->
+    <!--##############################################-->
+    <string name="servidor">http://192.168.0.3/</string>
+    <string name="dataBase">android/</string>
+
+
 </resources>

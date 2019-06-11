@@ -38,7 +38,7 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout calendario,documento,laudo,historico;
-    private TextView medicoContador, laudoContador, eventoContador;
+    private TextView medicoContador, laudoContador, eventoContador, id;
     private TextView nome;
     private Crud db;
     private Profile user;
@@ -74,8 +74,16 @@ public class MainActivity extends AppCompatActivity {
         db.addLaudo(objLaudo);
 
 
-
+        // Referência de layout
         nome = findViewById(R.id.txtNome);
+        id = findViewById(R.id.idRegistro);
+        calendario = findViewById(R.id.btnCalendario);
+        documento = findViewById(R.id.btnDocumentos);
+        laudo = findViewById(R.id.btnLaudos);
+        historico = findViewById(R.id.btnHistoricos);
+        medicoContador = findViewById(R.id.txtDescricaoMedico);
+        laudoContador = findViewById(R.id.txtDescricaoLaudo);
+        eventoContador = findViewById(R.id.txtDescricaoCalendario);
 
         // Seta nome do usuário
         user = db.selecionaProfile();
@@ -91,13 +99,6 @@ public class MainActivity extends AppCompatActivity {
         // Botão flutuante para configurações
         FloatingActionButton add = findViewById(R.id.btnConfig);
 
-        calendario = findViewById(R.id.btnCalendario);
-        documento = findViewById(R.id.btnDocumentos);
-        laudo = findViewById(R.id.btnLaudos);
-        historico = findViewById(R.id.btnHistoricos);
-        medicoContador = findViewById(R.id.txtDescricaoMedico);
-        laudoContador = findViewById(R.id.txtDescricaoLaudo);
-        eventoContador = findViewById(R.id.idCod);
         //Atualiza contadores de menu
         atualizaContadores();
 
@@ -148,6 +149,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void setarPropriedades(){
         nome.setText(user.getNome());
+
+        if(user.getIdRegistro() == null || user.getIdRegistro().isEmpty() || user.getIdRegistro().equals("")){
+            id.setText("#0000");
+        }
+        else {
+            id.setText(user.getIdRegistro());
+        }
+
         File img = new  File(user.getFotoCaminho());
 
         if(img.exists()){
@@ -164,7 +173,8 @@ public class MainActivity extends AppCompatActivity {
     public void atualizaContadores(){
         medicoContador.setText( db.qtdRegistroDB("medico") + " " +getString(R.string.medicoContador));
         laudoContador.setText( db.qtdRegistroDB("laudo") + " " +getString(R.string.laudoContador));
-        eventoContador.setText(getString(R.string.eventoContador) +" "+ db.qtdRegistroDB("evento") + " " +getString(R.string.eventoContador2));
+        eventoContador.setText(getString(R.string.eventoContador) + " " + db.qtdRegistroDB("evento") + " " + getString(R.string.eventoContador2));
+
         enviarDados();
     }
 
@@ -186,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
     public void postHttp(String nome, String sobrenome, String email){
         HttpClient httpClient = new DefaultHttpClient();
         //nome do servidor
-        HttpPost httpPost = new HttpPost("http://192.168.0.3/android/server.php");
+        HttpPost httpPost = new HttpPost(getString(R.string.servidor)+getString(R.string.dataBase)+"server.php");
 
         try{
             ArrayList<NameValuePair> valores = new ArrayList<NameValuePair>();

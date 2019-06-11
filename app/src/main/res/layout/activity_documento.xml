@@ -172,7 +172,7 @@
 
         <!--id do usuário-->
         <TextView
-            android:id="@+id/idCod"
+            android:id="@+id/idRegistro"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

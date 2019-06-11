@@ -211,12 +211,12 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
             // verificando se é para atualizar ou cadastrar
             if(user != null || enderecoUser != null) {
 
-                user = new Profile("Luan#1234", userNome, userEmail, spnGenero.getSelectedItemPosition(), userNascimento, userPhone, picturePath, userGestante, 1);
+                user = new Profile(db.selecionaProfile().getIdRegistro(), userNome, userEmail, spnGenero.getSelectedItemPosition(), userNascimento, userPhone, picturePath, userGestante, 1);
                 enderecoUser = new Endereco(userRua, userNumero, userComplemento, userBairro, userCEP, userProvincia, userPais);
                 sucessAtualizar();
             }
             else {
-                user = new Profile("Luan#1234", userNome, userEmail, spnGenero.getSelectedItemPosition(), userNascimento, userPhone, picturePath, userGestante, 1);
+                user = new Profile(user.getIdRegistro(), userNome, userEmail, spnGenero.getSelectedItemPosition(), userNascimento, userPhone, picturePath, userGestante, 1);
                 enderecoUser = new Endereco(userRua, userNumero, userComplemento, userBairro, userCEP, userProvincia, userPais);
                 db.addEndereco(enderecoUser);
                 db.addUser(user);
