@@ -13,12 +13,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.model.Crud;
 import com.example.myapplication.model.Medico;
 import com.example.myapplication.model.Profile;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout calendario,documento,laudo,historico;
@@ -39,10 +41,19 @@ public class MainActivity extends AppCompatActivity {
 
         // Debug Medico
         String[] exame = {"exame de sangue", "exame de tireoide"};
-        Medico med = new Medico("medico","clinico geral",exame, "Sem observação", 0, db.addData("Afonso pena", "1990-12-30 10:59:59"));
+        Medico med = new Medico("Dr. Carlos Machado","clinico geral",exame, "Sem observação", 0, db.addData("Afonso pena", "1990-12-30 10:59:59"));
         db.addMedico(med);
-        med = new Medico("medico","clinico geral 2",exame, "Sem observação", 0, db.addData("Afonso pena", "1990-12-30"));
+        String[]  exame2 = {"exame de sangue"};
+        med = new Medico("Dra. Maria Lucia Souza","pediatra",exame2, "Sem observação", 0, db.addData("Afonso pena", "2010-01-10 10:59:59"));
         db.addMedico(med);
+        String[]  exame3 = {"cirurgia cardiaca, bateria de exames"};
+        med = new Medico("Dra. Carol Dias Pinto","cardiologista",exame3, "Sem observação", 0, db.addData("Afonso pena", "2018-06-15 10:59:59"));
+        db.addMedico(med);
+        String[]  exame4 = {"Teste de contato, Biopsia, Exame por luz de Wood"};
+        med = new Medico("Dra. Ricardo Luís Matos","dermatologista",exame4, "Sem observação", 0, db.addData("Afonso pena", null));
+        db.addMedico(med);
+
+        Toast.makeText(this,"medico: " +db.selecionaMedico(1).toString(), Toast.LENGTH_LONG).show();
 
         nome = findViewById(R.id.txtNome);
 
