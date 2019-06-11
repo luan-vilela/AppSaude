@@ -6,6 +6,7 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ParseException;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +21,19 @@ import com.example.myapplication.model.Laudo;
 import com.example.myapplication.model.Medico;
 import com.example.myapplication.model.Profile;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
@@ -146,5 +159,56 @@ public class MainActivity extends AppCompatActivity {
     public void atualizaContadores(){
         medicoContador.setText( db.qtdRegistroDB("medico") + " " +getString(R.string.medicoContador));
         laudoContador.setText( db.qtdRegistroDB("laudo") + " " +getString(R.string.laudoContador));
+        enviarDados();
     }
+
+
+
+
+    //#################################### atualizar servidor
+    public void enviarDados(){
+
+
+        new Thread(){
+            public void run(){
+                postHttp("luan Vilela", "Lopes", "luan@gmail.com");
+            }
+        }.start();
+
+    }
+
+    public void postHttp(String nome, String sobrenome, String email){
+        HttpClient httpClient = new DefaultHttpClient();
+        //nome do servidor
+        HttpPost httpPost = new HttpPost("http://192.168.0.3/android/server.php");
+
+        try{
+            ArrayList<NameValuePair> valores = new ArrayList<NameValuePair>();
+            valores.add(new BasicNameValuePair("nome", nome));
+            valores.add(new BasicNameValuePair("sobrenome", sobrenome));
+            valores.add(new BasicNameValuePair("email", email));
+
+            httpPost.setEntity(new UrlEncodedFormEntity(valores));
+            final HttpResponse resposta = httpClient.execute(httpPost);
+
+            runOnUiThread(new Runnable(){
+                public void run(){
+                    try {
+                        Toast.makeText(getBaseContext(), EntityUtils.toString(resposta.getEntity()), Toast.LENGTH_SHORT).show();
+                    } catch (ParseException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+        catch(ClientProtocolException e){}
+        catch(IOException e){}
+    }
+
+
+
 }

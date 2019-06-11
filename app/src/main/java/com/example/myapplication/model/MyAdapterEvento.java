@@ -11,12 +11,11 @@ import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
-public class MyAdapterLaudo extends BaseAdapter {
-
+public class MyAdapterEvento extends BaseAdapter {
     Context context;
-    ArrayList<LaudoListView> arr;
+    ArrayList<Evento> arr;
 
-    public MyAdapterLaudo(Context context, ArrayList<LaudoListView> arr) {
+    public MyAdapterEvento(Context context, ArrayList<Evento> arr) {
         this.context = context;
         this.arr = arr;
     }
@@ -38,15 +37,15 @@ public class MyAdapterLaudo extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(context).inflate(R.layout.activity_lista_laudo,parent,false);
+        convertView = LayoutInflater.from(context).inflate(R.layout.activity_lista_evento,parent,false);
 
-        TextView id = (TextView) convertView.findViewById(R.id.lstIdLaudo);
-        TextView nome = (TextView) convertView.findViewById(R.id.lstNameLaudo);
-        TextView data = (TextView) convertView.findViewById(R.id.lstDataLaudo);
+        TextView id = (TextView) convertView.findViewById(R.id.lstIdEvento);
+        TextView nome = (TextView) convertView.findViewById(R.id.lstNameEvento);
+        TextView data = (TextView) convertView.findViewById(R.id.lstDataEvento);
 
         // Set data into textview
         id.setText(String.valueOf(arr.get(position).getId()));
-        nome.setText(String.valueOf(arr.get(position).getNome()));
+        nome.setText(String.valueOf(arr.get(position).getDescricao()));
         data.setText(String.valueOf(arr.get(position).getData()));
 
         return convertView;

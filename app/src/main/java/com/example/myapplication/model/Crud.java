@@ -28,6 +28,47 @@ public class Crud extends Connect {
         db.close();
     }
 
+    public void addEvento(Evento evento){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("descricao", evento.getDescricao());
+        values.put("idData", evento.getIdData());
+
+        db.insert("evento", null, values);
+        db.close();
+    }
+
+    /**
+     * Lista todos os Laudos da tabela e faz um join na data
+     * */
+    public ArrayList<Evento> listaTodosEventos(){
+        ArrayList<Evento> listaEvento = new ArrayList<>();
+
+        String query = "SELECT evento.id, evento.descricao, data.data FROM evento INNER JOIN data " +
+                "ON evento.idData = data.id";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()){
+            do{
+                //(int id, String nome, String especialidade, String exames, String data)
+                //custom array adapter
+                Evento evento = new Evento();
+                evento.setId(Integer.parseInt(cursor.getString(0)));
+                evento.setDescricao(cursor.getString(1));
+                evento.setData(cursor.getString(2));
+
+                listaEvento.add(evento);
+            }while (cursor.moveToNext());
+        }
+
+        return listaEvento;
+    }
+
+
     /**
      * Adiciona uma data e local no banco de dados
      * Data gerada automaticamente e local passado por string.
