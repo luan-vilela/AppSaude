@@ -25,7 +25,7 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout calendario,documento,laudo,historico;
-    private TextView medicoContador;
+    private TextView medicoContador, laudoContador;
     private TextView nome;
     private Crud db;
     private Profile user;
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         laudo = findViewById(R.id.btnLaudos);
         historico = findViewById(R.id.btnHistoricos);
         medicoContador = findViewById(R.id.txtDescricaoMedico);
+        laudoContador = findViewById(R.id.txtDescricaoLaudo);
 
         //Atualiza contadores de menu
         atualizaContadores();
@@ -144,5 +145,6 @@ public class MainActivity extends AppCompatActivity {
     /** Atualiza view usuário com quantidade de dados */
     public void atualizaContadores(){
         medicoContador.setText( db.qtdRegistroDB("medico") + " " +getString(R.string.medicoContador));
+        laudoContador.setText( db.qtdRegistroDB("laudo") + " " +getString(R.string.laudoContador));
     }
 }

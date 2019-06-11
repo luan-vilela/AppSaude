@@ -75,6 +75,7 @@
     <!--#                 Texto Laudos                # -->
     <!--##############################################-->
     <string name="Mylaud">Visualizar Laudos</string>
+    <string name="laudoContador">laudos vinculados</string>
 
     <!--##############################################-->
     <!--#                 Texto Médicos                # -->
