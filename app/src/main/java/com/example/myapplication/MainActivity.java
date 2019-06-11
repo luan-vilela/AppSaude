@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.model.Crud;
+import com.example.myapplication.model.Laudo;
 import com.example.myapplication.model.Medico;
 import com.example.myapplication.model.Profile;
 
@@ -52,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
         String[]  exame4 = {"Teste de contato, Biopsia, Exame por luz de Wood"};
         med = new Medico("Dra. Ricardo Luís Matos","dermatologista",exame4, "Sem observação", 0, db.addData("Afonso pena", null));
         db.addMedico(med);
+
+        // ############### DEBUG LAUDO #############################
+
+        Laudo objLaudo = new Laudo("Ressonância Magnética das Coxas", "Um tipo de procedimento é a biopsia com punch (em geral com 4 mm de diâmetro).", 1, db.addData("Aqui", null));
+        db.addLaudo(objLaudo);
+        objLaudo = new Laudo("Raspagem da pele", "Os raspados de pele auxiliam no diagnóstico de infecções fúngicas e escabiose. Para infecções fúngicas, a escama é obtida da borda da lesão e colocada em uma lâmina de microscópio. Então, adiciona-se uma gota de hidróxido de potássio a 10% a 20%. Hifas e/ou brotos de leveduras confirmam o diagnóstico de tinha ou candidíase. Na escabiose, o raspado é obtido dos túneis suspeitos, colocado imediatamente na lâmina com óleo mineral e recoberto por uma lamínula; o achado de ácaros, fezes ou ovos confirma o diagnóstico.", 1, db.addData("Aqui", null));
+        db.addLaudo(objLaudo);
+
+
 
         nome = findViewById(R.id.txtNome);
 

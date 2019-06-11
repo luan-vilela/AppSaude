@@ -94,7 +94,6 @@ public class Connect extends SQLiteOpenHelper {
             "id INTEGER PRIMARY KEY, " +
             "nome TEXT, " +
             "descricao TEXT, " +
-            "local_dispositivo TEXT, " +
             "gestante BOOLEAN, " +
             "idData INTEGER, " +
             "FOREIGN KEY(idData) REFERENCES data(id) " +

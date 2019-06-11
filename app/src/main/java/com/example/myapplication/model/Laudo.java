@@ -5,14 +5,12 @@ public class Laudo {
     private int id;
     private String nome;
     private String descrição;
-    private String localDispositivo;
     private int gestante;
     private int idData;
 
-    public Laudo(String nome, String descrição, String localDispositivo, int gestante, int idData) {
+    public Laudo(String nome, String descrição, int gestante, int idData) {
         this.nome = nome;
         this.descrição = descrição;
-        this.localDispositivo = localDispositivo;
         this.gestante = gestante;
         this.idData = idData;
     }
@@ -39,14 +37,6 @@ public class Laudo {
 
     public void setDescrição(String descrição) {
         this.descrição = descrição;
-    }
-
-    public String getLocalDispositivo() {
-        return localDispositivo;
-    }
-
-    public void setLocalDispositivo(String localDispositivo) {
-        this.localDispositivo = localDispositivo;
     }
 
     public int getGestante() {
