@@ -35,6 +35,8 @@ public class Profile {
         this.idDataCriacao = idDataCriacao;
     }
 
+    public Profile(){};
+
     public int getId() {
         return id;
     }

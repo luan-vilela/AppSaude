@@ -81,6 +81,8 @@
     <!--#                 Texto Médicos                # -->
     <!--##############################################-->
     <string name="medicoContador">médicos vinculados</string>
+    <string name="eventoContador">Você tem</string>
+    <string name="eventoContador2">eventos atualmente</string>
 
 
 </resources>

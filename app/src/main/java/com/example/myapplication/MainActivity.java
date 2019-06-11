@@ -38,7 +38,7 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout calendario,documento,laudo,historico;
-    private TextView medicoContador, laudoContador;
+    private TextView medicoContador, laudoContador, eventoContador;
     private TextView nome;
     private Crud db;
     private Profile user;
@@ -83,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
             setarPropriedades();
 
         }
+        else{
+            Intent it = new Intent(MainActivity.this,Inicio.class);
+            finish();
+            startActivity(it);
+        }
         // Botão flutuante para configurações
         FloatingActionButton add = findViewById(R.id.btnConfig);
 
@@ -92,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         historico = findViewById(R.id.btnHistoricos);
         medicoContador = findViewById(R.id.txtDescricaoMedico);
         laudoContador = findViewById(R.id.txtDescricaoLaudo);
-
+        eventoContador = findViewById(R.id.idCod);
         //Atualiza contadores de menu
         atualizaContadores();
 
@@ -159,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
     public void atualizaContadores(){
         medicoContador.setText( db.qtdRegistroDB("medico") + " " +getString(R.string.medicoContador));
         laudoContador.setText( db.qtdRegistroDB("laudo") + " " +getString(R.string.laudoContador));
+        eventoContador.setText(getString(R.string.eventoContador) +" "+ db.qtdRegistroDB("evento") + " " +getString(R.string.eventoContador2));
         enviarDados();
     }
 

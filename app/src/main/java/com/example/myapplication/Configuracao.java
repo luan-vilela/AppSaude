@@ -234,6 +234,7 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
     //Botão Cancelar
     public void btnCancel(View view){
         Intent it = new Intent(this, MainActivity.class);
+        finish();
         startActivity(it);
     }
 
