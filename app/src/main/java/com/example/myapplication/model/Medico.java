@@ -1,5 +1,7 @@
 package com.example.myapplication.model;
 
+import java.util.Arrays;
+
 public class Medico {
     private int id;
     private String nome;
@@ -45,7 +47,9 @@ public class Medico {
     }
 
     public String getExames() {
-        return exames.toString();
+        String strExame = Arrays.toString(exames);
+        strExame = strExame.replace("]", "");
+        return  strExame.replace("[", "");
     }
 
     public void setExames(String[] exames) {
@@ -74,5 +78,18 @@ public class Medico {
 
     public void setIdData(int idData) {
         this.idData = idData;
+    }
+
+    @Override
+    public String toString() {
+        return "Medico{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", especialidade='" + especialidade + '\'' +
+                ", exames=" + Arrays.toString(exames) +
+                ", observação='" + observação + '\'' +
+                ", gestante=" + gestante +
+                ", idData=" + idData +
+                '}';
     }
 }
