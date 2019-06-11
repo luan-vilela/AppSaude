@@ -62,6 +62,9 @@ public class MainDocumento extends AppCompatActivity {
         btnSelect = findViewById(R.id.btnSelect);
         ivImage = findViewById(R.id.ivImage);
         descricao = findViewById(R.id.edtNome);
+
+        db = new Crud(this);
+
         btnTake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

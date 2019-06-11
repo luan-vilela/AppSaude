@@ -34,4 +34,11 @@ public class MainHistorico extends AppCompatActivity {
         lista.setAdapter(adapter);
     }
 
+
+    //Botão Cancelar
+    public void btnCancel(View view) {
+        Intent it = new Intent(this, MainActivity.class);
+        startActivity(it);
+    }
+
 }
