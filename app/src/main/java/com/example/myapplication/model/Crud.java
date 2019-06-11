@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -174,13 +175,6 @@ public class Crud extends Connect {
     public void addMedico(Medico medico){
         //String nome, String especialidade, String[] exames, String observação, int gestante, int idData)
 
-//        "id INTEGER PRIMARY KEY, " +
-//                "nome TEXT, " +
-//                "especialidade TEXT, " +
-//                "examesPedidos TEXT, " +
-//                "observacao TEXT, " +
-//                "gestante BOOLEAN, " +
-//                "idData INTEGER, " +
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -193,6 +187,57 @@ public class Crud extends Connect {
 
         db.insert("medico", null,  values);
         db.close();
+    }
+
+    public Medico selecionaMedico(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Medico medico = null;
+        Cursor cursor = db.query("medico", new String[]{"id", "nome", "especialidade", "examesPedidos", "observacao", "gestante" , "idData"},
+                "id = ?", new String[] {String.valueOf(id)}, null,null,null,null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+//    public Medico(String nome, String especialidade, String[] exames, String observação, int gestante, int idData)
+            medico = new Medico(
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3).split(","),
+                    cursor.getString(4),
+                    cursor.getInt(5),
+                    cursor.getInt(6)
+            );
+            medico.setId(cursor.getInt(0));
+            db.close();
+        }
+        return  medico;
+    }
+
+    public ArrayList<MedicoListView> listaTodosMedicos(){
+        ArrayList<MedicoListView> listaMedico = new ArrayList<MedicoListView>();
+
+        String query = "SELECT medico.id, medico.nome, medico.especialidade, medico.examesPedidos, data.data FROM medico INNER JOIN data " +
+                "ON medico.idData = data.id";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()){
+            do{
+                //(int id, String nome, String especialidade, String exames, String data)
+                //custom array adapter
+                MedicoListView medico = new MedicoListView();
+                medico.setId(Integer.parseInt(cursor.getString(0)));
+                medico.setNome(cursor.getString(1));
+                medico.setEspecialidade(cursor.getString(2));
+                medico.setExames(cursor.getString(3));
+                medico.setData(cursor.getString(4));
+
+                listaMedico.add(medico);
+            }while (cursor.moveToNext());
+        }
+
+        return listaMedico;
     }
 
     /**

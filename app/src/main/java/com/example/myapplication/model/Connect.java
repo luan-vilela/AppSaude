@@ -79,7 +79,7 @@ public class Connect extends SQLiteOpenHelper {
             "especialidade TEXT, " +
             "examesPedidos TEXT, " +
             "observacao TEXT, " +
-            "gestante BOOLEAN, " +
+            "gestante INTEGER, " +
             "idData INTEGER, " +
             "FOREIGN KEY(idData) REFERENCES data(id) " +
             ")";
