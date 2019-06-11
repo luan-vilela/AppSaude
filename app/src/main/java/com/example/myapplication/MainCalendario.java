@@ -126,11 +126,12 @@ public class MainCalendario extends Activity implements Button.OnClickListener {
                                       int day) {
 
                     String data = year + "-" + month + "-" + day;
-                    
 
-                    Toast.makeText(com.example.myapplication.MainCalendario.this,
+                    db.addData("campo grande",data);
+
+                   /* Toast.makeText(com.example.myapplication.MainCalendario.this,
                             "DATA = " + data, Toast.LENGTH_SHORT)
-                            .show();
+                            .show();*/
                 }
             };
 
