@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
         med = new Medico("Dra. Ricardo Luís Matos","dermatologista",exame4, "Sem observação", 0, db.addData("Afonso pena", null));
         db.addMedico(med);
 
-        Toast.makeText(this,"medico: " +db.selecionaMedico(1).toString(), Toast.LENGTH_LONG).show();
-
         nome = findViewById(R.id.txtNome);
 
         // Seta nome do usuário
