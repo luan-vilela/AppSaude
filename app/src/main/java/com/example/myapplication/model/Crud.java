@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 public class Crud extends Connect {
@@ -24,7 +25,7 @@ public class Crud extends Connect {
         values.put("descricao", doc.getDescricao());
         values.put("foto", doc.getFoto());
 
-        db.insert("MainDocumento", null, values);
+        db.insert("Documento", null, values);
         db.close();
     }
 
@@ -356,5 +357,4 @@ public class Crud extends Connect {
         db.update("profile", values, "id = ?", new String[] {String.valueOf(1)});
         db.close();
     }
-
 }

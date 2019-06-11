@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout calendario,documento,laudo,historico;
     private TextView medicoContador;
     private TextView nome;
-
     private Crud db;
     private Profile user;
 
