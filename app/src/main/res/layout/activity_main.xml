@@ -9,6 +9,7 @@
 
 
     <ScrollView
+        android:id="@+id/Sview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"
@@ -28,6 +29,7 @@
                 android:id="@+id/ivImagem"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="0"
@@ -51,7 +53,7 @@
             <!--Visualizar laudos-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -108,7 +110,7 @@
             <!--Histórico de médicos-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -165,7 +167,7 @@
             <!--Calendário-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -222,7 +224,7 @@
             <!--Meus documentos-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -281,8 +283,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom"
-                android:layout_weight="1"
                 android:layout_marginTop="8dp"
+                android:layout_weight="1"
                 android:gravity="bottom"
                 android:text="#1234"
                 android:textAlignment="center"
