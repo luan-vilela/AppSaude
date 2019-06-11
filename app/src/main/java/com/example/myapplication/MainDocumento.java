@@ -43,7 +43,7 @@ public class MainDocumento extends AppCompatActivity {
     private ImageView ivImage;
     private String foto;
     private TextView descricao;
-    private com.example.myapplication.model.Documento docUser;
+    private Documento docUser;
 
     Crud db;
 

@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,8 +24,7 @@ public class Crud extends Connect {
         values.put("descricao", doc.getDescricao());
         values.put("foto", doc.getFoto());
 
-        db.insert("documento", null, values);
-
+        db.insert("MainDocumento", null, values);
         db.close();
     }
 

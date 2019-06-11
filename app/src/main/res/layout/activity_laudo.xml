@@ -29,17 +29,7 @@
                 android:orientation="horizontal"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp">
-
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/button3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="btnCancel"
-                    app:backgroundTint="@color/bg_clean"
-                    app:srcCompat="?attr/actionModeCloseDrawable" />
-
-            </LinearLayout>
+                android:layout_marginTop="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,7 +74,7 @@
                 android:orientation="vertical">
 
                 <ListView
-                    android:id="@+id/listaMedico"
+                    android:id="@+id/ListViewLaudo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
