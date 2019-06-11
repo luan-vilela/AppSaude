@@ -24,7 +24,7 @@ public class Crud extends Connect {
         values.put("descricao", doc.getDescricao());
         values.put("foto", doc.getFoto());
 
-        db.insert("MainDocumento", null, values);
+        db.insert("documento", null, values);
         db.close();
     }
 
@@ -212,6 +212,52 @@ public class Crud extends Connect {
         return  medico;
     }
 
+    public void addLaudo(Laudo laudo){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("nome", laudo.getNome());
+        values.put("descricao", laudo.getDescrição());
+        values.put("gestante", laudo.getGestante());
+        values.put("idData", laudo.getIdData());
+
+        db.insert("laudo", null,  values);
+        db.close();
+    }
+
+    /**
+     * Lista todos os Laudos da tabela e faz um join na data
+     * */
+    public ArrayList<LaudoListView> listaTodosLaudos(){
+        ArrayList<LaudoListView> listLaudo = new ArrayList<>();
+
+        String query = "SELECT laudo.id, laudo.nome, data.data FROM laudo INNER JOIN data " +
+                "ON laudo.idData = data.id";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()){
+            do{
+                //(int id, String nome, String especialidade, String exames, String data)
+                //custom array adapter
+                LaudoListView laudo = new LaudoListView();
+                laudo.setId(Integer.parseInt(cursor.getString(0)));
+                laudo.setNome(cursor.getString(1));
+                laudo.setData(cursor.getString(2));
+
+                listLaudo.add(laudo);
+            }while (cursor.moveToNext());
+        }
+
+        return listLaudo;
+    }
+
+    /**
+     * Lista todos os médicos da tabela e faz um join na data
+     * */
     public ArrayList<MedicoListView> listaTodosMedicos(){
         ArrayList<MedicoListView> listaMedico = new ArrayList<MedicoListView>();
 
