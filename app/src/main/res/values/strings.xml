@@ -83,6 +83,12 @@
     <string name="medicoContador">médicos vinculados</string>
     <string name="eventoContador">Você tem</string>
     <string name="eventoContador2">eventos atualmente</string>
+    <string name="novoMedico">novo médico.</string>
+    <string name="novosMedicos">novos médicos.</string>
+    <string name="novoLaudo">novo laudo.</string>
+    <string name="novosLaudos">novos laudos.</string>
+    <string name="novoEvento">novo evento.</string>
+    <string name="novosEventos">novos eventos.</string>
 
 
 

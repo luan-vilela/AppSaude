@@ -154,12 +154,14 @@ public class Crud extends Connect {
      * */
     public int qtdRegistroDB(String TabelaName){
         String query = "SELECT count(*) FROM " + TabelaName;
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query,null);
-
-        cursor.moveToFirst();
-        db.close();
-        return cursor.getInt(0);
+        if(cursor != null) {
+            cursor.moveToFirst();
+           // db.close();
+            return cursor.getInt(0);
+        }
+        return 0;
     }
 
 
@@ -292,7 +294,7 @@ public class Crud extends Connect {
                 listLaudo.add(laudo);
             }while (cursor.moveToNext());
         }
-
+        db.close();
         return listLaudo;
     }
 
@@ -323,7 +325,7 @@ public class Crud extends Connect {
                 listaMedico.add(medico);
             }while (cursor.moveToNext());
         }
-
+        db.close();
         return listaMedico;
     }
 

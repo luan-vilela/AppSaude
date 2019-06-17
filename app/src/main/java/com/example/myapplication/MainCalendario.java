@@ -66,4 +66,12 @@ public class MainCalendario extends Activity {
         MyAdapterEvento adapter = new MyAdapterEvento(this, listaEventos);
         lista.setAdapter(adapter);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent it = new Intent(this, MainActivity.class);
+        finish();
+        startActivity(it);
+    }
 }

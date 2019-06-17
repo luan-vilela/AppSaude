@@ -41,4 +41,12 @@ public class MainHistorico extends AppCompatActivity {
         startActivity(it);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent it = new Intent(this, MainActivity.class);
+        finish();
+        startActivity(it);
+    }
+
 }

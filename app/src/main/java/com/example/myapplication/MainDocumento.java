@@ -247,4 +247,12 @@ public class MainDocumento extends AppCompatActivity {
             Toast.makeText(this, "Adicionado com sucesso", Toast.LENGTH_LONG).show();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent it = new Intent(this, MainActivity.class);
+        finish();
+        startActivity(it);
+    }
 }

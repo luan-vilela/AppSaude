@@ -15,9 +15,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.myapplication.model.Crud;
+import com.example.myapplication.model.Evento;
 import com.example.myapplication.model.Laudo;
 import com.example.myapplication.model.Medico;
 import com.example.myapplication.model.Profile;
@@ -31,13 +40,25 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+
+    //servidor
+    private RequestQueue requestQueue;
+    private Map<String, String> params;
+
     private LinearLayout calendario,documento,laudo,historico;
     private TextView medicoContador, laudoContador, eventoContador, id;
     private TextView nome;
@@ -50,31 +71,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        atualizarEnvio();
         db = new Crud(this);
-
-        // Debug Medico
-        String[] exame = {"exame de sangue", "exame de tireoide"};
-        Medico med = new Medico("Dr. Carlos Machado","clinico geral",exame, "Sem observação", 0, db.addData("Afonso pena", "1990-12-30 10:59:59"));
-        db.addMedico(med);
-        String[]  exame2 = {"exame de sangue"};
-        med = new Medico("Dra. Maria Lucia Souza","pediatra",exame2, "Sem observação", 0, db.addData("Afonso pena", "2010-01-10 10:59:59"));
-        db.addMedico(med);
-        String[]  exame3 = {"cirurgia cardiaca, bateria de exames"};
-        med = new Medico("Dra. Carol Dias Pinto","cardiologista",exame3, "Sem observação", 0, db.addData("Afonso pena", "2018-06-15 10:59:59"));
-        db.addMedico(med);
-        String[]  exame4 = {"Teste de contato, Biopsia, Exame por luz de Wood"};
-        med = new Medico("Dra. Ricardo Luís Matos","dermatologista",exame4, "Sem observação", 0, db.addData("Afonso pena", null));
-        db.addMedico(med);
-
-        // ############### DEBUG LAUDO #############################
-
-        Laudo objLaudo = new Laudo("Ressonância Magnética das Coxas", "Um tipo de procedimento é a biopsia com punch (em geral com 4 mm de diâmetro).", 1, db.addData("Aqui", null));
-        db.addLaudo(objLaudo);
-        objLaudo = new Laudo("Raspagem da pele", "Os raspados de pele auxiliam no diagnóstico de infecções fúngicas e escabiose. Para infecções fúngicas, a escama é obtida da borda da lesão e colocada em uma lâmina de microscópio. Então, adiciona-se uma gota de hidróxido de potássio a 10% a 20%. Hifas e/ou brotos de leveduras confirmam o diagnóstico de tinha ou candidíase. Na escabiose, o raspado é obtido dos túneis suspeitos, colocado imediatamente na lâmina com óleo mineral e recoberto por uma lamínula; o achado de ácaros, fezes ou ovos confirma o diagnóstico.", 1, db.addData("Aqui", null));
-        db.addLaudo(objLaudo);
-
-
+        requestQueue = Volley.newRequestQueue(this);
         // Referência de layout
         nome = findViewById(R.id.txtNome);
         id = findViewById(R.id.idRegistro);
@@ -85,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         medicoContador = findViewById(R.id.txtDescricaoMedico);
         laudoContador = findViewById(R.id.txtDescricaoLaudo);
         eventoContador = findViewById(R.id.txtDescricaoCalendario);
+
 
         // Seta nome do usuário
         user = db.selecionaProfile();
@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, MainCalendario.class);
+                finish();
                 startActivity(it);
             }
         });
@@ -124,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this,MeusDocumentos.class);
+                finish();
                 startActivity(it);
             }
         });
@@ -177,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
 
     /** Atualiza view usuário com quantidade de dados */
     public void atualizaContadores(){
+
         medicoContador.setText( db.qtdRegistroDB("medico") + " " +getString(R.string.medicoContador));
         laudoContador.setText( db.qtdRegistroDB("laudo") + " " +getString(R.string.laudoContador));
         eventoContador.setText(getString(R.string.eventoContador) + " " + db.qtdRegistroDB("evento") + " " + getString(R.string.eventoContador2));
@@ -187,9 +190,138 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    //#################################### atualizar servidor
+    //#################################### SERVIDOR PROFILE ######################################
+    void enviaDados(String url){
+        StringRequest request = new StringRequest(Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        String msg = null;
+
+                        try {
+                            int contador = 0;
+                            JSONObject json = new JSONObject(response);
+
+                            // ############         CARREGA MÉDICO      ############
+                            JSONArray jsonMedico = json.getJSONArray("medico");
+
+                            for(int i = db.qtdRegistroDB("medico"); i < jsonMedico.length(); i++){
+                                JSONObject objMedico = jsonMedico.getJSONObject(i);
+                                String[] exame = objMedico.getString("examesPedidos").split(",");
+                                Medico med = new Medico( objMedico.getString("nome"), objMedico.getString("especialidade"),exame, objMedico.getString("observacao"), objMedico.getInt("gestante"), db.addData(objMedico.getString("local"), objMedico.getString("data")));
+                                db.addMedico(med);
+                                contador++;
+                            }
+                            if(contador == 1){
+                                msg = getString(R.string.eventoContador) + " " + contador + " " + getString(R.string.novoMedico);
+                                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+                                contador = 0;
+                            }
+                            else if(contador > 1){
+                                msg = getString(R.string.eventoContador) + " " + contador + " " + getString(R.string.novosMedicos);
+                                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+                                contador = 0;
+                            }
 
 
+                            // ############         CARREGA LAUDOS      ############
+                            jsonMedico = json.getJSONArray("laudo");
+
+                            for(int i = db.qtdRegistroDB("laudo"); i < jsonMedico.length(); i++){
+                                JSONObject objectLaudo = jsonMedico.getJSONObject(i);
+                                Laudo laudo = new Laudo(objectLaudo.getString("nome"), objectLaudo.getString("descricao"), objectLaudo.getInt("gestante"), db.addData(objectLaudo.getString("local"), objectLaudo.getString("data")));
+                                db.addLaudo(laudo);
+                                contador++;
+                            }
+                            if(contador == 1){
+                                msg = getString(R.string.eventoContador) + " " + contador + " " + getString(R.string.novoLaudo);
+                                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+                                contador = 0;
+                            }
+                            else if(contador > 1){
+                                msg = getString(R.string.eventoContador) + " " + contador + " " + getString(R.string.novosLaudos);
+                                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+                                contador = 0;
+                            }
+
+
+                            // ############         CARREGA EVENTOS      ############
+                            jsonMedico = json.getJSONArray("evento");
+
+                            for(int i = db.qtdRegistroDB("evento"); i < jsonMedico.length(); i++){
+                                JSONObject objEvento = jsonMedico.getJSONObject(i);
+                                Evento evento = new Evento(objEvento.getString("descricao"), db.addData(objEvento.getString("local"), objEvento.getString("data")));
+                                db.addEvento(evento);
+                                contador++;
+                            }
+                            if(contador == 1){
+                                msg = getString(R.string.eventoContador) + " " + contador + " " + getString(R.string.novoEvento);
+                                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+                                contador = 0;
+                            }
+                            else if(contador > 1){
+                                msg = getString(R.string.eventoContador) + " " + contador + " " + getString(R.string.novosEventos);
+                                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+                                contador = 0;
+                            }
+
+
+
+                            atualizaContadores();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MainActivity.this, "ERRO: "+ error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            public Map<String, String> getParams() throws AuthFailureError {
+                params = new HashMap<String, String>();
+                // Envia id registro para o servidor
+                // ele vai retornar os dados do banco atualizados
+                params.put("idRegistro", user.getIdRegistro());
+                params.put("key", "123"); // caso precise de usar uma chave
+                return (params);
+            }
+        };
+
+        request.setTag("tagMedico");
+        requestQueue.add(request);
+    }
+
+
+
+    void atualizarEnvio(){
+        long TEMPO = (1000 * 10); // chama o método a cada 3 segundos
+        Timer timer = null;
+        if (timer == null) {
+            timer = new Timer();
+            TimerTask tarefa = new TimerTask() {
+
+                public void run() {
+                    try {
+                        enviaDados(getString(R.string.servidor)+getString(R.string.path)+"serverContent.php");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            timer.scheduleAtFixedRate(tarefa, 1000, 1000*30);
+        }
+
+
+    }
 
 
 }

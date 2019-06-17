@@ -170,15 +170,17 @@ public class Inicio extends AppCompatActivity {
                             user.setGestante(json.getInt("gestante"));
                             user.setFotoCaminho(json.getString("fotoCaminho"));
 
+                            db.addUser(user);
+
+                            Intent it = new Intent(Inicio.this, MainActivity.class);
+                            finish();
+                            startActivity(it);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
-                        db.addUser(user);
 
-                        Intent it = new Intent(Inicio.this, MainActivity.class);
-                        finish();
-                        startActivity(it);
 
                     }
                 },

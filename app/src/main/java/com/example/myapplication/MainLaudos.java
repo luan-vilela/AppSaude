@@ -36,4 +36,12 @@ public class MainLaudos extends AppCompatActivity {
         lista.setAdapter(adapter);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent it = new Intent(this, MainActivity.class);
+        finish();
+        startActivity(it);
+    }
 }
