@@ -10,6 +10,7 @@ import android.net.ParseException;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this,Configuracao.class);
+                finish();
                 startActivity(it);
             }
         });
@@ -156,15 +158,19 @@ public class MainActivity extends AppCompatActivity {
         else {
             id.setText(user.getIdRegistro());
         }
+        /*********** FOTO ************/
+        // Verifica se existe foto no banco de dados
+        // Se exister verifica se caminho é válido
 
-        File img = new  File(user.getFotoCaminho());
+        if(user.getFotoCaminho() != null){
+            File img = new File(user.getFotoCaminho());
 
-        if(img.exists()){
-            // coloca foto válida no picturePath caso altera outros dados da tabela menos a foto
-            Bitmap myBitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
-            ImageView minhaFoto = findViewById(R.id.ivImagem);
-            minhaFoto.setImageBitmap(myBitmap);
-
+            if(img.exists()){
+                // coloca foto válida no picturePath caso altera outros dados da tabela menos a foto
+                Bitmap myBitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+                ImageView minhaFoto = findViewById(R.id.ivImagem);
+                minhaFoto.setImageBitmap(myBitmap);
+            }
         }
 
     }
@@ -175,55 +181,14 @@ public class MainActivity extends AppCompatActivity {
         laudoContador.setText( db.qtdRegistroDB("laudo") + " " +getString(R.string.laudoContador));
         eventoContador.setText(getString(R.string.eventoContador) + " " + db.qtdRegistroDB("evento") + " " + getString(R.string.eventoContador2));
 
-        enviarDados();
+
     }
 
 
 
 
     //#################################### atualizar servidor
-    public void enviarDados(){
 
-
-        new Thread(){
-            public void run(){
-                postHttp("luan Vilela", "Lopes", "luan@gmail.com");
-            }
-        }.start();
-
-    }
-
-    public void postHttp(String nome, String sobrenome, String email){
-        HttpClient httpClient = new DefaultHttpClient();
-        //nome do servidor
-        HttpPost httpPost = new HttpPost(getString(R.string.servidor)+getString(R.string.dataBase)+"server.php");
-
-        try{
-            ArrayList<NameValuePair> valores = new ArrayList<NameValuePair>();
-            valores.add(new BasicNameValuePair("nome", nome));
-            valores.add(new BasicNameValuePair("sobrenome", sobrenome));
-            valores.add(new BasicNameValuePair("email", email));
-
-            httpPost.setEntity(new UrlEncodedFormEntity(valores));
-            final HttpResponse resposta = httpClient.execute(httpPost);
-
-            runOnUiThread(new Runnable(){
-                public void run(){
-                    try {
-                        Toast.makeText(getBaseContext(), EntityUtils.toString(resposta.getEntity()), Toast.LENGTH_SHORT).show();
-                    } catch (ParseException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-        catch(ClientProtocolException e){}
-        catch(IOException e){}
-    }
 
 
 

@@ -89,6 +89,10 @@ public class Profile {
         return telefone;
     }
 
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
     public String getFotoCaminho() {
         return fotoCaminho;
     }

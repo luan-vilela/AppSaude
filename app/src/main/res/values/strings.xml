@@ -90,7 +90,7 @@
     <!--#                 Texto SERVIDOR                # -->
     <!--##############################################-->
     <string name="servidor">http://192.168.0.3/</string>
-    <string name="dataBase">android/</string>
+    <string name="path">android/</string>
 
 
 </resources>

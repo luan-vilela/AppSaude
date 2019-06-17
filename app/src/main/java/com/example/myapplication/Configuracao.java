@@ -31,10 +31,20 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.myapplication.model.Connect;
 import com.example.myapplication.model.Crud;
 import com.example.myapplication.model.Endereco;
 import com.example.myapplication.model.Profile;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -42,10 +52,14 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Configuracao extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
+    //servidor
+    private RequestQueue requestQueue;
+    private Map<String, String> params;
     // Código da requisição
     private static final int PERMISSION_REQUEST_CODE = 200;
     // salvar local imagem
@@ -106,7 +120,7 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         email = findViewById(R.id.inputEmail);
         telefone = findViewById(R.id.inputTelefone);
         gestanteSwitch = findViewById(R.id.gestante);
-
+        IdRegitroApp = findViewById(R.id.idRegistro);
         rua = findViewById(R.id.inputEndereco);
         cep = findViewById(R.id.inputCep);
         bairro = findViewById(R.id.inputBairro);
@@ -153,7 +167,6 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         //# caso já tenha cadastro no celular
 
         user = db.selecionaProfile();
-
         if(user != null && user.getId() == 1){
             enderecoUser = db.selecionaEndereco();
             setarPropriedades();
@@ -206,11 +219,11 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
 
         // Caso todos os campos obrigatórios estejam preenchidos
         if(teste == 1){
+            requestQueue = Volley.newRequestQueue(this);
             // caso não tenha foto
-            picturePath = (picturePath == null ? "" : picturePath);
+            picturePath = (picturePath == null ? user.getFotoCaminho() : picturePath);
             // verificando se é para atualizar ou cadastrar
             if(user != null || enderecoUser != null) {
-
                 user = new Profile(db.selecionaProfile().getIdRegistro(), userNome, userEmail, spnGenero.getSelectedItemPosition(), userNascimento, userPhone, picturePath, userGestante, 1);
                 enderecoUser = new Endereco(userRua, userNumero, userComplemento, userBairro, userCEP, userProvincia, userPais);
                 sucessAtualizar();
@@ -248,7 +261,7 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         email.setText(user.getEmail());
         telefone.setText(user.getTelefone());
         spnGenero.setSelection(user.getSexo());
-
+        IdRegitroApp.setText(user.getIdRegistro());
         // Seta Switch da gestante
         // faz conversão de int para Boolean
         Boolean setGestante = (user.getGestante() == 0) ? false : true;
@@ -257,16 +270,16 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         /*********** FOTO ************/
         // Verifica se existe foto no banco de dados
         // Se exister verifica se caminho é válido
-        File img = new  File(user.getFotoCaminho());
 
-        if(img.exists()){
-            // coloca foto válida no picturePath caso altera outros dados da tabela menos a foto
-            picturePath = user.getFotoCaminho();
-            Bitmap myBitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
-            minhaFoto.setImageBitmap(myBitmap);
+        if(user.getFotoCaminho() != null){
+            File img = new File(user.getFotoCaminho());
+
+            if(img.exists()){
+                // coloca foto válida no picturePath caso altera outros dados da tabela menos a foto
+                Bitmap myBitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+                minhaFoto.setImageBitmap(myBitmap);
+            }
         }
-
-
 
         // endereço
         if(enderecoUser != null) {
@@ -298,8 +311,8 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                        startActivity(getIntent());
+                        // envia dados servidor
+                        enviaDados(getString(R.string.servidor)+getString(R.string.path)+"profile.php");
                     }
                 });
         AlertDialog alert = builder.create();
@@ -316,10 +329,17 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Caso confirme a altualização de dados
-                        db.atualizaEndereco(enderecoUser);
+                        // envia dados servidor
+                        enviaDados(getString(R.string.servidor)+getString(R.string.path)+"profile.php");
+                        if(db.qtdRegistroDB("endereco") == 1){
+                            db.atualizaEndereco(enderecoUser);
+                        }
+                        else{
+                            db.addEndereco(enderecoUser);
+                        }
+
                         db.atualizaProfile(user);
-                        finish();
-                        startActivity(getIntent());
+
                     }
                 })
                 .setNegativeButton(R.string.btnCancelar, new DialogInterface.OnClickListener() {
@@ -354,6 +374,58 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
 
             }
         }
+    }
+
+    //#################################### SERVIDOR PROFILE ######################################
+    void enviaDados(String url){
+        StringRequest request = new StringRequest(Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject json = new JSONObject(response);
+
+                            user.setIdRegistro(json.getString("idRegistro"));
+                            user.setEmail(json.getString("email"));
+                            user.setNome(json.getString("nome"));
+                            user.setSexo(json.getInt("sexo"));
+                            user.setTelefone(json.getString("telefone"));
+                            user.setData_nasc(json.getString("dataNascimento"));
+                            user.setGestante(json.getInt("gestante"));
+                            user.setFotoCaminho(json.getString("fotoCaminho"));
+
+                            finish();
+                            startActivity(getIntent());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Configuracao.this, "ERRO: "+ error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            public Map<String, String> getParams() throws AuthFailureError {
+                params = new HashMap<String, String>();
+                params.put("nome", user.getNome());
+                params.put("email", user.getEmail());
+                params.put("fotoCaminho", user.getFotoCaminho());
+                params.put("sexo", String.valueOf(user.getSexo()));
+                params.put("dataNascimento", user.getData_nasc());
+                params.put("telefone", user.getTelefone());
+                params.put("gestante", String.valueOf(user.getGestante()));
+                params.put("key", "123"); // caso precise de usar uma chave
+                return (params);
+            }
+        };
+
+        request.setTag("tag");
+        requestQueue.add(request);
     }
 
     //#################### PERMISSÃO STORAGE ########################
@@ -391,6 +463,14 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         } else {
             requestPermission();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent it = new Intent(this, MainActivity.class);
+        finish();
+        startActivity(it);
     }
 
     @Override

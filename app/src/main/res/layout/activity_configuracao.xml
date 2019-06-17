@@ -160,7 +160,9 @@
                     android:id="@+id/inputEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
                     android:ems="10"
+                    android:hint="mail@mail.com"
                     android:inputType="textEmailAddress" />
 
                 <TextView

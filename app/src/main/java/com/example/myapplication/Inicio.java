@@ -13,10 +13,19 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.myapplication.model.Crud;
 import com.example.myapplication.model.Profile;
 
@@ -29,12 +38,20 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Inicio extends AppCompatActivity {
-
+    //servidor
+    private RequestQueue requestQueue;
+    private Map<String, String> params;
     // Código da requisição
     private static final int PERMISSION_REQUEST_CODE = 200;
     // salvar local imagem
@@ -42,6 +59,8 @@ public class Inicio extends AppCompatActivity {
     private ImageView minhaFoto;
     private EditText nome;
     private EditText email;
+    String userNome;
+    String userEmail;
     private String idRegistro;
     Crud db = new Crud(this);
 
@@ -70,12 +89,14 @@ public class Inicio extends AppCompatActivity {
 
     //Botão salvar
     public void btnSalvar(View view) {
+
+        requestQueue = Volley.newRequestQueue(this);
         //Variável de teste
         // caso não seja especificado algo que deve ser escrito
         // teste muda para 0
         int teste = 1;
-        String userNome = nome.getText().toString();
-        String userEmail = email.getText().toString();
+        userNome = nome.getText().toString();
+        userEmail = email.getText().toString();
 
 
         if (userNome == null || userNome.equals("")) {
@@ -92,18 +113,8 @@ public class Inicio extends AppCompatActivity {
             // caso não tenha foto
             picturePath = (picturePath == null ? "" : picturePath);
             // envia dados servidor
+            enviaDados(getString(R.string.servidor)+getString(R.string.path)+"profileStart.php");
 
-            enviarDados();
-
-            Profile aux = new Profile();
-            aux.setEmail(userEmail);
-            aux.setNome(userNome);
-            aux.setFotoCaminho(picturePath);
-            db.addUser(aux);
-
-            Intent it = new Intent(Inicio.this, MainActivity.class);
-            finish();
-            startActivity(it);
 
         }
     }
@@ -138,57 +149,68 @@ public class Inicio extends AppCompatActivity {
     }
 
 
-    //#################################### atualizar servidor
-    public void enviarDados(){
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                postHttp(nome.getText().toString(), email.getText().toString());
-            }
-        });
-        t.start();
+    //#################################### SERVIDOR PROFILE ######################################
+    void enviaDados(String url){
+        StringRequest request = new StringRequest(Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        user = new Profile();
 
-        try {
-            t.join();
-        } catch (InterruptedException e) {}
+                        try {
+                            JSONObject json = new JSONObject(response);
 
-    }
+                            user.setIdRegistro(json.getString("idRegistro"));
+                            user.setEmail(json.getString("email"));
+                            user.setNome(json.getString("nome"));
+                            user.setSexo(json.getInt("sexo"));
+                            user.setTelefone(json.getString("telefone"));
+                            user.setData_nasc(json.getString("dataNascimento"));
+                            user.setGestante(json.getInt("gestante"));
+                            user.setFotoCaminho(json.getString("fotoCaminho"));
 
-    public void postHttp(String nome, String email){
-        HttpClient httpClient = new DefaultHttpClient();
-        //nome do servidor
-        HttpPost httpPost = new HttpPost(getString(R.string.servidor)+getString(R.string.dataBase)+"inicio.php");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-        try{
-            ArrayList<NameValuePair> valores = new ArrayList<NameValuePair>();
-            valores.add(new BasicNameValuePair("nome", nome));
-            valores.add(new BasicNameValuePair("email", email));
-            valores.add(new BasicNameValuePair("caminhoFoto", picturePath));
-            httpPost.setEntity(new UrlEncodedFormEntity(valores));
-            final HttpResponse resposta = httpClient.execute(httpPost);
+                        db.addUser(user);
 
-            runOnUiThread(new Runnable(){
-                public void run(){
-                    try {
-                        //salva registro
-                        idRegistro = EntityUtils.toString(resposta.getEntity());
-                        Profile usuario = db.selecionaProfile();
-                        usuario.setIdRegistro(idRegistro);
-                        db.atualizaProfile(usuario);
-                    } catch (ParseException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        Intent it = new Intent(Inicio.this, MainActivity.class);
+                        finish();
+                        startActivity(it);
+
                     }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Inicio.this, "ERRO: "+ error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+                @Override
+                public Map<String, String> getParams() throws AuthFailureError{
+                    params = new HashMap<String, String>();
+                    params.put("nome", userNome);
+                    params.put("email", userEmail);
+                    params.put("fotoCaminho", picturePath);
+                    params.put("key", "123"); // caso precise de usar uma chave
+                    return (params);
                 }
-            });
-        }
-        catch(ClientProtocolException e){}
-        catch(IOException e){}
+        };
+
+        request.setTag("tag");
+        requestQueue.add(request);
     }
 
+
+    // Destroi rescontrução da activity
+    @Override
+    public void onStop(){
+        super.onStop();
+
+        requestQueue.cancelAll("tag");
+    }
 
 
 
@@ -228,4 +250,6 @@ public class Inicio extends AppCompatActivity {
             requestPermission();
         }
     }
+
+
 }
