@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        atualizarEnvio();
+
         db = new Crud(this);
         requestQueue = Volley.newRequestQueue(this);
         // Referência de layout
@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         user = db.selecionaProfile();
         if(user != null && user.getId() == 1) {
             setarPropriedades();
+            atualizarEnvio();
 
         }
         else{
@@ -206,7 +207,6 @@ public class MainActivity extends AppCompatActivity {
 
                             // ############         CARREGA MÉDICO      ############
                             JSONArray jsonMedico = json.getJSONArray("medico");
-
                             for(int i = db.qtdRegistroDB("medico"); i < jsonMedico.length(); i++){
                                 JSONObject objMedico = jsonMedico.getJSONObject(i);
                                 String[] exame = objMedico.getString("examesPedidos").split(",");
@@ -228,7 +228,6 @@ public class MainActivity extends AppCompatActivity {
 
                             // ############         CARREGA LAUDOS      ############
                             jsonMedico = json.getJSONArray("laudo");
-
                             for(int i = db.qtdRegistroDB("laudo"); i < jsonMedico.length(); i++){
                                 JSONObject objectLaudo = jsonMedico.getJSONObject(i);
                                 Laudo laudo = new Laudo(objectLaudo.getString("nome"), objectLaudo.getString("descricao"), objectLaudo.getInt("gestante"), db.addData(objectLaudo.getString("local"), objectLaudo.getString("data")));
@@ -249,7 +248,6 @@ public class MainActivity extends AppCompatActivity {
 
                             // ############         CARREGA EVENTOS      ############
                             jsonMedico = json.getJSONArray("evento");
-
                             for(int i = db.qtdRegistroDB("evento"); i < jsonMedico.length(); i++){
                                 JSONObject objEvento = jsonMedico.getJSONObject(i);
                                 Evento evento = new Evento(objEvento.getString("descricao"), db.addData(objEvento.getString("local"), objEvento.getString("data")));
@@ -301,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+// ############# FAZ REQUISIÇÃO PARA O SERVIDOR DE 30s E 30s  #############
     void atualizarEnvio(){
         long TEMPO = (1000 * 10); // chama o método a cada 3 segundos
         Timer timer = null;

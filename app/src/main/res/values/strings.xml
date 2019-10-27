@@ -95,7 +95,7 @@
     <!--##############################################-->
     <!--#                 Texto SERVIDOR                # -->
     <!--##############################################-->
-    <string name="servidor">http://192.168.0.3/</string>
+    <string name="servidor">http://gradweb.facom.ufms.br/~201619040034/</string>
     <string name="path">android/</string>
 
 

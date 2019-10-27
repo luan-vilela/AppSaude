@@ -210,7 +210,6 @@ public class Inicio extends AppCompatActivity {
     @Override
     public void onStop(){
         super.onStop();
-
         requestQueue.cancelAll("tag");
     }
 

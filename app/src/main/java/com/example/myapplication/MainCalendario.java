@@ -56,9 +56,6 @@ public class MainCalendario extends Activity {
 
         db = new Crud(this);
 
-        Evento ev = new Evento("uma descrição simples ok", db.addData("local", null));
-        db.addEvento(ev);
-
         lista = findViewById(R.id.listViewEvento);
 
         listaEventos = new ArrayList<>();
